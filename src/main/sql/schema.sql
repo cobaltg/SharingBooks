@@ -32,9 +32,45 @@ release_time timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '书籍发布
 PRIMARY KEY (book_id),
 key idx_release_tiem(release_time)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='书籍信息表';
+
+--删除book表格，把书籍表格分为可借图书表和借书信息表
+drop table book;
+
+-- 可借书籍表格（字段和书籍表一样）
+CREATE TABLE sharedbook(
+book_id bigint NOT NULL AUTO_INCREMENT COMMENT '书籍id',
+book_name VARCHAR(64) NOT NULL COMMENT '书籍名称',
+book_description VARCHAR(128) NOT NULL COMMENT '书籍描述',
+master_phone VARCHAR(64) NOT NULL COMMENT '书籍主人联系方式',
+release_time timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '分享书籍发布时间',
+PRIMARY KEY (book_id),
+key idx_release_tiem(release_time)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='可借书籍信息表';
 -- 初始化数据
 insert into
-	book(book_name,book_description,master_phone,release_time)
+	sharedbook(book_name,book_description,master_phone,release_time)
+values
+	('《算法导论》','Stein，机械工业出版社','13476587398','2017-05-23 00:00:00'),
+	('《Think in Java》','Eckel，机械工业出版社','18716576483','2017-05-23 00:00:00'),
+	('《深入理解Java Web技术内幕》','许令波，电子工业出版社','18775367896','2017-05-23 00:00:00'),
+	('《Java核心技术卷一》','Horstmann，机械工业出版社','13748475873','2017-05-23 00:00:00'),
+	('《编译原理》','张素琴，清华大学出版社','13878759873','2017-05-23 00:00:00'),
+	('《计算机操作系统》','汤小丹，西安电子科技大学出版社','18777837798','2017-05-23 00:00:00');
+
+-- 创建借书登记表
+CREATE TABLE borrowedbook(
+book_id bigint NOT NULL AUTO_INCREMENT COMMENT '书籍id',
+book_name VARCHAR(64) NOT NULL COMMENT '书籍名称',
+book_description VARCHAR(128) NOT NULL COMMENT '书籍描述',
+borrower_phone VARCHAR(64) NOT NULL COMMENT '借书人联系方式',
+release_time timestamp  NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '借书信息发布时间',
+PRIMARY KEY (book_id),
+key idx_release_tiem(release_time)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='借书信息表';
+
+-- 初始化数据
+insert into
+	borrowedbook(book_name,book_description,borrower_phone,release_time)
 values
 	('《算法导论》','Stein，机械工业出版社','13476587398','2017-05-23 00:00:00'),
 	('《Think in Java》','Eckel，机械工业出版社','18716576483','2017-05-23 00:00:00'),
@@ -45,7 +81,7 @@ values
 
 -- 创建借阅/借出书籍成功明细表
 create table success_borrowed_shared(
-borrow_id bigint NOT NULL COMMENT '明细表编号',
+list_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号',
 book_name bigint NOT NULL COMMENT '借阅/借出图书名称',
 book_master varchar(64) NOT NULL COMMENT '书籍主人',
 user_name varchar(64) NOT NULL COMMENT '借阅/借出用户',
@@ -53,4 +89,26 @@ state tinyint NOT NULL DEFAULT 0 COMMENT '状态标示：1:成功 0:失败',
 create_time timestamp  NOT NULL COMMENT '创建时间',
 PRIMARY KEY(borrow_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借阅/借出书籍成功明细表';
-	
+
+-- 删除借阅/借出书籍成功明细表，把它一分为二，分为借阅成功表，和借出成功表
+drop table success_borrowed_shared;
+
+--创建借阅成功明细表
+create table success_borrowed(
+list_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号',
+book_name bigint NOT NULL COMMENT '借阅图书名称',
+book_master varchar(64) NOT NULL COMMENT '书籍主人',
+state tinyint NOT NULL DEFAULT 0 COMMENT '状态标示：1:成功 0:失败',
+create_time timestamp  NOT NULL COMMENT '创建时间',
+PRIMARY KEY(list_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借阅书籍成功明细表';
+
+-- 创建借出书籍成功明细表
+create table success_lended(
+list_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号',
+book_name bigint NOT NULL COMMENT '借阅图书名称',
+book_borrower varchar(64) NOT NULL COMMENT '借书人名字',
+state tinyint NOT NULL DEFAULT 0 COMMENT '状态标示：1:成功 0:失败',
+create_time timestamp  NOT NULL COMMENT '创建时间',
+PRIMARY KEY(list_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借出书籍成功明细表';
