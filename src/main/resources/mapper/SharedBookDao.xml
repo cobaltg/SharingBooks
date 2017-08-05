@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sharingbooks.dao.SharedBookDao">
+	<!-- 为dao接口方法提供sql语句配置 -->
+	
+	<resultMap type="com.sharingbooks.entity.SharedBook" id="SharedBookResult">
+  	  <id column="book_id" jdbcType="INTEGER" property="bookId"/>
+      <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
+      <result column="book_description" jdbcType="VARCHAR" property="bookDescription"/>
+      <result column="master_phone" jdbcType="VARCHAR" property="masterPhone"/>
+      <result column="release_time" jdbcType="DATE" property="releaseTime"/>
+	</resultMap>
+	
+	
+	<insert id="addSharedBook" parameterType="com.sharingbooks.entity.SharedBook">
+	  insert into sharedbook
+	    (book_name,book_description,master_phone,release_time)
+	  values
+	    (#{bookName},#{bookDescription},)#{masterPhone},#{releaseTime}
+	</insert>
+	
+	<delete id="reduceSharedBook" parameterType="long">
+	  delete from sharedbook where book_id = #{_parameter}
+	</delete>
+	
+	<delete id="reduceBorrowedBookByUserInfo" parameterType="com.sharingbooks.util.BooknameUserphone">
+	  delete 
+	    from sharedbook
+	  where
+	    book_name = #{bookName} and master_phone = #{userPhone}
+	</delete>
+	
+	<update id="updateSharedBook" parameterType="com.sharingbooks.entity.SharedBook">
+	  update 
+	    sharedbook 
+	  set 
+	    book_name=#{bookName},
+	    book_description=#{bookDescription}
+	  where 
+	    master_phone=#{masterPhone}
+	</update>
+	
+	<select id="querySharedBookList" parameterType="java.util.Map" resultMap="SharedBookResult">
+	  select
+	    book_id,book_name,book_description,master_phone,release_time
+	  from
+	    sharedbook
+	  <where>
+	    <if test="sharedbook.bookName!=null and !&quot;&quot;.equals(sharedbook.bookName.trim())">and book_name like '%' #{sharedbook.bookName} '%'</if>
+	    <if test="sharedbook.bookDescription!=null and !&quot;&quot;.equals(sharedbook.bookDescription.trim())">and book_description like '%' #{sharedbook.bookDescription} '%'</if>
+	  </where>
+	  order by book_id limit #{page.dbIndex},#{page.dbNumber}
+	</select>
+	
+	<select id="countSharedBook" parameterType="com.sharingbooks.entity.SharedBook" resultType="int">
+	  select
+	    count(*)
+	  from
+	    sharedbook
+	  <where>
+	    <if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">and book_name like '%' #{bookName} '%'</if>
+	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
+	  </where>
+	</select>
+</mapper>

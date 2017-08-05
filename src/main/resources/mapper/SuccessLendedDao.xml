@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.sharingbooks.dao.SuccessLendedDao">
+
+	<resultMap type="com.sharingbooks.entity.SuccessLended" id="SuccessLendedResult">
+  	  <id column="list_id" jdbcType="INTEGER" property="listId"/>
+      <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
+      <result column="book_borrower" jdbcType="VARCHAR" property="bookBorrower"/>
+      <result column="master_phone" jdbcType="VARCHAR" property="masterPhone"/>
+      <result column="create_time" jdbcType="DATE" property="createTime"/>
+	</resultMap>
+
+	<insert id="insertSuccessLended" parameterType="com.sharingbooks.entity.SuccessLended">
+	  insert into success_lended
+	    (book_name,book_borrower,master_phone,create_time)
+	  values
+	    (#{bookName},#{bookBorrower},)#{masterPhone},#{createTime}
+	</insert>
+	
+	<select id="querySuccessLendedList" parameterType="java.util.Map" resultMap="SuccessLendedResult">
+	  select
+	    list_id,book_name,book_borrower,create_time
+	  from
+	    success_lended
+	  where 
+	    master_phone = #{userinfo.userPhone}
+	  order by list_id limit #{page.dbIndex},#{page.dbNumber}
+	</select>
+	
+	<select id="countSuccessLended" parameterType="String" resultType="int">
+	  select
+	    count(*)
+	  from
+	    success_lended
+	  where
+	    master_phone = #{_parameter}
+	</select>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.sharingbooks.dao.SuccessBorrowedDao">
+
+	<resultMap type="com.sharingbooks.entity.SuccessBorrowed" id="SuccessBorrowedResult">
+  	  <id column="list_id" jdbcType="INTEGER" property="listId"/>
+      <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
+      <result column="book_master" jdbcType="VARCHAR" property="bookMaster"/>
+      <result column="borrower_phone" jdbcType="VARCHAR" property="borrowerPhone"/>
+      <result column="create_time" jdbcType="DATE" property="createTime"/>
+	</resultMap>
+
+	<insert id="insertSuccessBorrowed" parameterType="com.sharingbooks.entity.SuccessBorrowed">
+	  insert into success_borrowed
+	    (book_name,book_master,borrower_phone,create_time)
+	  values
+	    (#{bookName},#{bookMaster},)#{borrowerPhone},#{createTime}
+	</insert>
+	
+	<select id="querySuccessBorrowedList" parameterType="java.util.Map" resultMap="SuccessBorrowedResult">
+	  select
+	    list_id,book_name,book_master,create_time
+	  from
+	    success_borrowed
+	  where
+	    borrower_phone = #{userinfo.userPhone}
+	  order by list_id limit #{page.dbIndex},#{page.dbNumber}
+	</select>
+	
+	<select id="countSuccessBorrowed" parameterType="String" resultType="int">
+	  select
+	    count(*)
+	  from
+	    success_borrowed
+	  where
+	    borrower_phone = #{_parameter}
+	</select>
+</mapper>
