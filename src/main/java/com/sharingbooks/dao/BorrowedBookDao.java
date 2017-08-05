@@ -1,8 +1,10 @@
 package com.sharingbooks.dao;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
+import com.sharingbooks.entity.BorrowedBook;
+import com.sharingbooks.util.BooknameUserphone;
 
 public interface BorrowedBookDao {
 	
@@ -12,7 +14,7 @@ public interface BorrowedBookDao {
 			 * @param borrowedbook 书籍的所有信息
 			 * return 插入的行数
 			 */
-			public int addBorrowedBook(BorrowedBookDao borrowedbook);
+			public int addBorrowedBook(BorrowedBook borrowedbook);
 	
 	//删除信息操作所需的接口，或
 	//分享书籍操作所需接口
@@ -22,28 +24,26 @@ public interface BorrowedBookDao {
 		 * @param operatedTime
 		 * @return 删除的行数
 		 */
-		public int reduceBorrowedBook(long bookId, Date operatedTime);
-		
-		//修改表中书籍的信息
-		public void updateBorrowedBook(BorrowedBookDao borrowedbook);
-		
-		
-		
-		//查询可借书籍列表信息所需接口
-		/**
-		 * 根据查询条件查询借书登记表中的所有信息
-		 */
-		public List<BorrowedBookDao> queryBorrowedBookList(Map<String,Object> parameter);
+		public int reduceBorrowedBook(long bookId);
 		
 		/**
-		 * 根据id查询借书登记表中书籍的信息
-		 * @param bookid 书籍号
+		 * 当用户借书时，需要修改自身的借书信息（如登记了，则要减一）。
+		 * @param parameter 书名和借书人的联系方式
 		 * @return
 		 */
-		public BorrowedBookDao queryBorrowedBookById(long bookid);
-		
+		public int reduceBorrowedBookByUserInfo(BooknameUserphone booknameUserphone);
+	
+		//修改表中书籍的信息
+		public int updateBorrowedBook(BorrowedBook borrowedbook);
+			
+		//查询可借书籍列表信息所需接口
 		/**
-		 * 根据查询条件查询消息列表的条数
+		 * 根据查询条件查询借书登记表中的所有信息(把BorrowedBookDao对象、Page对象封装在Map中。根据书名、书籍描述、第几条开始取、总共去多少条信息)
 		 */
-		public int countBorrowedBook(BorrowedBookDao borrowedbook);
+		public List<BorrowedBook> queryBorrowedBookList(Map<String,Object> parameter);
+				
+		/**
+		 * 根据查询条件查询书籍信息的条数
+		 */
+		public int countBorrowedBook(BorrowedBook borrowedbook);
 }

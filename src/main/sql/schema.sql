@@ -112,3 +112,8 @@ state tinyint NOT NULL DEFAULT 0 COMMENT '状态标示：1:成功 0:失败',
 create_time timestamp  NOT NULL COMMENT '创建时间',
 PRIMARY KEY(list_id)
 )ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借出书籍成功明细表';
+
+--修改明细表中的字段
+alter table success_borrowed CHANGE state borrower_phone VARCHAR(64) NOT NULL COMMENT '借书人联系方式';
+alter table success_lended CHANGE state master_phone VARCHAR(64) NOT NULL COMMENT '书籍主人联系方式';
+

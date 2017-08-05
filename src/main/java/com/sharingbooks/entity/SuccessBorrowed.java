@@ -13,7 +13,7 @@ public class SuccessBorrowed {
 	
 	private String bookMaster;
 	
-	private String state;
+	private String borrowerPhone;
 	
 	private Date createTime;
 
@@ -41,12 +41,14 @@ public class SuccessBorrowed {
 		this.bookMaster = bookMaster;
 	}
 
-	public String getState() {
-		return state;
+
+
+	public String getBorrowerPhone() {
+		return borrowerPhone;
 	}
 
-	public void setState(String state) {
-		this.state = state;
+	public void setBorrowerPhone(String borrowerPhone) {
+		this.borrowerPhone = borrowerPhone;
 	}
 
 	public Date getCreateTime() {
@@ -60,7 +62,10 @@ public class SuccessBorrowed {
 	@Override
 	public String toString() {
 		return "SuccessBorrowed [listId=" + listId + ", bookName=" + bookName
-				+ ", bookMaster=" + bookMaster + ", state=" + state
-				+ ", createTime=" + createTime + "]";
+				+ ", bookMaster=" + bookMaster + ", borrowerPhone="
+				+ borrowerPhone + ", createTime=" + createTime + "]";
 	}
+
+
+
 }

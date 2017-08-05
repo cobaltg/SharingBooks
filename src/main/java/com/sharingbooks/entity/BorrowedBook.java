@@ -11,8 +11,7 @@ public class BorrowedBook {
 		private String bookDescription;
 		
 		private String borrowerPhone;
-		
-		
+			
 		private Date releaseTime;
 
 		public long getBookId() {
