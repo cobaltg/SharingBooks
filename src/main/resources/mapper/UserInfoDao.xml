@@ -5,46 +5,84 @@
 
 <mapper namespace="com.sharingbooks.dao.UserInfoDao">
 
-	<resultMap type="com.sharingbooks.entity.UserInfo" id="UserInfoResult">
+<!--	<resultMap type="com.sharingbooks.entity.UserInfo" id="UserInfoResult">
 	  <id column="user_id" jdbcType="INTEGER" property="userId"/>
 	  <result column="user_name" jdbcType="VARCHAR" property="userName"/>
 	  <result column="user_pwd" jdbcType="VARCHAR" property="userPwd"/>
 	  <result column="user_phone" jdbcType="VARCHAR" property="userPhone"/>
 	</resultMap>
+ -->
 
-	<insert id="addUser" parameterType="com.sharingbooks.entity.UserInfo">
+	<select id="queryById" parameterType="long" resultType="UserInfo">
+	  select
+	    user_id,user_name,user_pwd,user_phone
+	  from
+	    userinfo
+	  where
+	    user_id = #{userId}
+	</select>
+	
+	<insert id="addUser">
 	  insert into userinfo
 	    (user_name,user_pwd,user_phone)
 	  values
-	    (#{userName},#{userPwd},)#{userPhone}
+	    (#{userName},#{userPwd},#{userPhone})
 	</insert>
-	
-	<update id="updateUser" parameterType="com.sharingbooks.entity.UserInfo">
+	 
+	<update id="updateUser">
 	  update userinfo set
 	    user_name=#{userName},
-	    user_pwd=#{userPwd),
-	    user_phone=#{userPhone} 
+	    user_pwd=#{userPwd},
+	    user_phone=#{userPhone}
+	  where user_id=#{userId}
 	</update>
+
+	<delete id="reduceUser">
+	  delete from userinfo where user_id=#{userId}
+	</delete>
 	
-	<select id="getUser" parameterType="com.sharingbooks.entity.UserInfo" resultType="int">
+	<select id="getUser" resultType="int">
 	  select
 	    count(*)
 	  from
 	    userinfo
 	  where 
-	    user_pwd=#{userPwd} and (user_name=#{userName} or user_phone=#{userPhone})    
+	    (user_name=#{userName} and  user_pwd=#{userPwd}) or (user_phone=#{userPhone} and user_pwd=#{userPwd})    
 	</select>
 	
+	<select id="getUserById" resultType="UserInfo">
+		select
+		  user_id,user_name,user_pwd,user_phone
+		from
+		  userinfo
+		where
+		  user_id=#{userId}
+	</select>
 	
-	<select id="queryUserInfoList" parameterType="java.util.Map" resultMap="UserInfoResult">
+	<select id="getUserByName" resultType="UserInfo">
+		select
+		  user_id,user_name,user_pwd,user_phone
+		from
+		  userinfo
+		where
+		  user_name=#{userName}
+	</select>
+	
+	<select id="getUserByPhone" resultType="UserInfo">
+		select
+		  user_id,user_name,user_pwd,user_phone
+		from
+		  userinfo
+		where
+		  user_phone=#{userPhone}
+	</select>
+	
+	<select id="queryUserInfoList" resultType="UserInfo">
 	  select
-	    user_id,user_name,user_pwd,borrower_phone,user_phone
+	    user_id,user_name,user_pwd,user_phone
 	  from
 	    userinfo
-	  <where>
-	    <if test="borrowedbook.bookName!=null and !&quot;&quot;.equals(borrowedbook.bookName.trim())">and book_name like '%' #{borrowedbook.bookName} '%'</if>
-	    <if test="borrowedbook.bookDescription!=null and !&quot;&quot;.equals(borrowedbook.bookDescription.trim())">and book_description like '%' #{borrowedbook.bookDescription} '%'</if>
-	  </where>
-	  order by user_id limit #{page.dbIndex},#{page.dbNumber}
+	  order by user_id limit #{offset},#{limit}
 	</select>
+
 </mapper>

@@ -10,6 +10,10 @@ public class UserInfo {
 	
 	private String userPhone;
 
+	
+	public UserInfo() {
+	}
+
 	public long getUserId() {
 		return userId;
 	}
