@@ -1,4 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/sharingbooks/dao/BorrowedBookDao.java=UTF-8
 encoding//src/main/java/com/sharingbooks/dao/UserInfoDao.java=UTF-8
+encoding//src/main/resources/spring=UTF-8
 encoding//src/main/sql/schema.sql=UTF-8
