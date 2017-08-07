@@ -47,7 +47,7 @@ public class UserInfoDaoTest {
 	
 	@Test
 	public void testUpdateUser() {
-		int i=userInfoDao.updateUser("Monical", "Monical", "18715647645",8);
+		int i=userInfoDao.updateUser("", "monical", "",8);
 		System.out.println(i);
 	}
 //测试结果
@@ -105,6 +105,12 @@ public class UserInfoDaoTest {
 //测试结果
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]		
 	
+	@Test 
+	public void testCountUserInfo(){
+		System.out.println(userInfoDao.countUserInfo());
+	}
+//测试结果
+//	3
 	@Test
 	public void testQueryUserInfoList() {
 		List<UserInfo> list=userInfoDao.queryUserInfoList(0, 100);

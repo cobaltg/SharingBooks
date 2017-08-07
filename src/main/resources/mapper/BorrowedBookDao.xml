@@ -5,55 +5,28 @@
     
 <mapper namespace="com.sharingbooks.dao.BorrowedBookDao">
 	
-	<resultMap type="com.sharingbooks.entity.BorrowedBook" id="BorrowedBookResult">
-  	  <id column="book_id" jdbcType="INTEGER" property="bookId"/>
-      <result column="book_name" jdbcType="VARCHAR" property="bookName"/>
-      <result column="book_description" jdbcType="VARCHAR" property="bookDescription"/>
-      <result column="borrower_phone" jdbcType="VARCHAR" property="borrowerPhone"/>
-      <result column="release_time" jdbcType="DATE" property="releaseTime"/>
-	</resultMap>
-	
-	<insert id="addBorrowedBook" parameterType="com.sharingbooks.entity.BorrowedBook">
-	  insert into borrowedbook
-	    (book_name,book_description,borrower_phone,release_time)
-	  values
-	    (#{bookName},#{bookDescription},)#{borrowerPhone},#{releaseTime}
-	</insert>
-	
-	<delete id="reduceBorrowedBook" parameterType="long">
-	  delete from borrowedbook where book_id = #{_parameter}
-	</delete>
-	
-	<delete id="reduceBorrowedBookByUserInfo" parameterType="com.sharingbooks.util.BooknameUserphone">
-	  delete 
-	    from borrowedbook
-	  where
-	    book_name = #{bookName} and borrower_phone = #{userPhone}
-	</delete>
-	
-	<update id="updateBorrowedBook" parameterType="com.sharingbooks.entity.BorrowedBook">
-	  update 
-	    borrowedbook 
-	  set 
-	    book_name=#{bookName},
-	    book_description=#{bookDescription}
+	<select id="queryBorrowedBookById" parameterType="long" resultType="BorrowedBook">
+	  select
+	    book_id,book_name,book_description,borrower_phone,release_time
+	  from
+	    borrowedbook
 	  where 
-	    borrower_phone=#{borrowerPhone}
-	</update>
+	    book_id=#{bookId}
+	</select>
 	
-	<select id="queryBorrowedBookList" parameterType="java.util.Map" resultMap="BorrowedBookResult">
+	<select id="queryBorrowedBookByBookInfo" resultType="BorrowedBook">
 	  select
 	    book_id,book_name,book_description,borrower_phone,release_time
 	  from
 	    borrowedbook
 	  <where>
-	    <if test="borrowedbook.bookName!=null and !&quot;&quot;.equals(borrowedbook.bookName.trim())">and book_name like '%' #{borrowedbook.bookName} '%'</if>
-	    <if test="borrowedbook.bookDescription!=null and !&quot;&quot;.equals(borrowedbook.bookDescription.trim())">and book_description like '%' #{borrowedbook.bookDescription} '%'</if>
+	    <if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">and book_name like '%' #{bookName} '%'</if>
+	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
 	  </where>
-	  order by book_id limit #{page.dbIndex},#{page.dbNumber}
+	  order by book_id
 	</select>
 	
-	<select id="countBorrowedBook" parameterType="com.sharingbooks.entity.BorrowedBook" resultType="int">
+	<select id="countBorrowedBook" resultType="int">
 	  select
 	    count(*)
 	  from
@@ -63,4 +36,42 @@
 	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
 	  </where>
 	</select>
+	
+	<select id="queryBorrowedBookList" resultType="BorrowedBook">
+	  select
+	    book_id,book_name,book_description,borrower_phone,release_time
+	  from
+	    borrowedbook
+	  order by book_id limit #{offset},#{limit}
+	</select>
+	
+	<insert id="addBorrowedBook" parameterType="BorrowedBook">
+	  insert into borrowedbook
+	    (book_name,book_description,borrower_phone,release_time)
+	  values
+	    (#{bookName},#{bookDescription},#{borrowerPhone},#{releaseTime})
+	</insert>
+	
+	<delete id="reduceBorrowedBook" parameterType="long">
+	  delete from borrowedbook where book_id = #{bookId}
+	</delete>
+	
+	<delete id="reduceBorrowedBookByBorrowed">
+	  delete 
+	    from borrowedbook
+	  where
+	    book_name = #{bookName} and borrower_phone = #{userPhone}
+	</delete>
+	
+	<update id="updateBorrowedBook">
+	  update 
+	    borrowedbook 
+	  <set>
+	  	<if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">book_name = #{bookName},</if>
+	  	<if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">book_description = #{bookDescription}</if>
+	  </set> 
+ 	  where 
+ 	    book_id=#{bookId}
+	</update>
+	
 </mapper>
