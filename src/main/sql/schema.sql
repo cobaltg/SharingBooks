@@ -117,3 +117,42 @@ PRIMARY KEY(list_id)
 alter table success_borrowed CHANGE state borrower_phone VARCHAR(64) NOT NULL COMMENT '借书人联系方式';
 alter table success_lended CHANGE state master_phone VARCHAR(64) NOT NULL COMMENT '书籍主人联系方式';
 
+-- 添加SharedBook表格的测试数据
+insert into
+	sharedbook(book_name,book_description,master_phone,release_time)
+values
+	('《算法竞赛入门经典》','刘汝佳，清华大学出版社','13476587387','2017-05-23 00:00:00'),
+	('《计算机算法设计与分析》','王晓东，电子工业出版社','18716576498','2017-05-23 00:00:00'),
+	('《深入理解Java Web技术内幕》','许令波，电子工业出版社','18715367865','2017-05-23 00:00:00'),
+	('《Java核心技术卷一》','Horstmann，机械工业出版社','13748475867','2017-05-23 00:00:00'),
+	('《编译原理》','张素琴，清华大学出版社','13878759898','2017-05-23 00:00:00'),
+	('《计算机操作系统》','汤小丹，西安电子科技大学出版社','18777837789','2017-05-23 00:00:00'),
+	('《汇编语言》','王爽，清华大学出版社','18777837876','2017-05-23 00:00:00'),
+	('《数值分析》','李庆杨，清华大学出版社','18777837887','2017-05-23 00:00:00'),
+	('《汇编语言》','郑晓薇，机械工业出版社','18777837956','2017-05-23 00:00:00');
+
+-- 添加borrowedbook表的测试数据
+	insert into
+	borrowedbook(book_name,book_description,borrower_phone,release_time)
+values
+	('《百年孤独》','加西亚·马尔克斯，南海出版社','13476587398','2017-05-23 00:00:00'),
+	('《平凡的世界》','路遥，北京出版集团公司','18716576483','2017-05-23 00:00:00'),
+	('《深入理解Java Web技术内幕》','许令波，电子工业出版社','18775367896','2017-05-23 00:00:00'),
+	('《Java核心技术卷一》','Horstmann，机械工业出版社','13748475873','2017-05-23 00:00:00'),
+	('《编译原理》','张素琴，清华大学出版社','13878759873','2017-05-23 00:00:00'),
+	('《计算机操作系统》','汤小丹，西安电子科技大学出版社','18777837798','2017-05-23 00:00:00'),
+	('《C++ Primer》','Lippman，人民邮电出版社','18777837798','2017-05-23 00:00:00'),
+	('《高等数学》','同济大学数学系，高等教育出版社','18777837798','2017-05-23 00:00:00'),
+	('《TCP/IP详细卷一》','斯蒂文斯，机械工业出版社','18777837798','2017-05-23 00:00:00');
+	
+-- 调整成功借阅书籍表
+--把字段list_id 改为字段book_id 
+alter table success_borrowed change list_id book_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号';
+--删除字段book_name, 字段book_master
+alter table success_borrowed drop book_name, drop book_master;
+
+-- 调整成功借出书籍表
+--把字段list_id 改为字段book_id 
+alter table success_lended change list_id book_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号';
+--删除字段book_name, 字段book_master
+alter table success_lended drop book_name, drop book_borrower;

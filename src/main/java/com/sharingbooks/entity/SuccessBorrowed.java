@@ -7,41 +7,21 @@ import java.util.Date;
  * @author think
  */
 public class SuccessBorrowed {
-	private long listId;
-	
-	private String bookName;
-	
-	private String bookMaster;
+	private long bookId;
 	
 	private String borrowerPhone;
 	
-	private Date createTime;
+	private Date createTime=new Date();
+	
+	private SharedBook sharedBook;
 
-	public long getListId() {
-		return listId;
+	public long getBookId() {
+		return bookId;
 	}
 
-	public void setListId(long listId) {
-		this.listId = listId;
+	public void setBookId(long bookId) {
+		this.bookId = bookId;
 	}
-
-	public String getBookName() {
-		return bookName;
-	}
-
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
-
-	public String getBookMaster() {
-		return bookMaster;
-	}
-
-	public void setBookMaster(String bookMaster) {
-		this.bookMaster = bookMaster;
-	}
-
-
 
 	public String getBorrowerPhone() {
 		return borrowerPhone;
@@ -59,13 +39,18 @@ public class SuccessBorrowed {
 		this.createTime = createTime;
 	}
 
-	@Override
-	public String toString() {
-		return "SuccessBorrowed [listId=" + listId + ", bookName=" + bookName
-				+ ", bookMaster=" + bookMaster + ", borrowerPhone="
-				+ borrowerPhone + ", createTime=" + createTime + "]";
+	public SharedBook getSharedBook() {
+		return sharedBook;
 	}
 
+	public void setSharedBook(SharedBook sharedBook) {
+		this.sharedBook = sharedBook;
+	}
 
-
+	@Override
+	public String toString() {
+		return "SuccessBorrowed [listId=" + bookId + ", borrowerPhone="
+				+ borrowerPhone + ", createTime=" + createTime
+				+ ", sharedBook=" + sharedBook + "]";
+	}
 }

@@ -1,6 +1,7 @@
 package com.sharingbooks.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sharingbooks.entity.UserInfo;
@@ -64,6 +65,14 @@ public interface UserInfoDao {
 	 * @return
 	 */
 	public UserInfo getUserByPhone(String userPhone);
+	
+	/**
+	 * 查询用户的数量
+	 * @param userName 用户名
+	 * @param userPhone 用户联系方式
+	 * @return
+	 */
+	public int countUserInfo();
 	
 	/**
 	 * 根据偏移量查询条件查询用户信息列表
