@@ -21,7 +21,9 @@
 	    sb.create_time,
 	    s.book_id "sharedBook.book_id",
 	    s.book_name "sharedBook.book_name",
-	    s.master_phone "sharedBook.master_phone"
+	    s.book_description "sharedBook.book_description",
+	    s.master_phone "sharedBook.master_phone",
+	    s.release_time "sharedBook.release_time"
 	  from success_borrowed sb
 	  inner join sharedbook s on sb.book_id = s.book_id
 	  where sb.book_id = #{bookId}
@@ -29,11 +31,14 @@
 	
 	<select id="querySuccessBorrowedListByBorrowerPhone" parameterType="String" resultType="SuccessBorrowed">
 	  select
-	  	sb.book_id,
+	    sb.book_id,
+	    sb.borrower_phone,
 	    sb.create_time,
 	    s.book_id "sharedBook.book_id",
 	    s.book_name "sharedBook.book_name",
-	    s.book_master "sharedBook.book_master"
+	    s.book_description "sharedBook.book_description",
+	    s.master_phone "sharedBook.master_phone",
+	    s.release_time "sharedBook.release_time"
 	  from success_borrowed sb
 	  inner join sharedbook s on sb.book_id = s.book_id
 	  where sb.borrower_phone = #{borrowerPhone}
@@ -55,7 +60,9 @@
 	    sb.create_time,
 	    s.book_id "sharedBook.book_id",
 	    s.book_name "sharedBook.book_name",
-	    s.book_master "sharedBook.book_master"
+	    s.book_description "sharedBook.book_description",
+	    s.master_phone "sharedBook.master_phone",
+	    s.release_time "sharedBook.release_time"
 	  from success_borrowed sb
 	  inner join sharedbook s on sb.book_id = s.book_id
 	</select>
@@ -74,9 +81,11 @@
 	    sb.create_time,
 	    s.book_id "sharedBook.book_id",
 	    s.book_name "sharedBook.book_name",
-	    s.book_master "sharedBook.book_master"
+	    s.book_description "sharedBook.book_description",
+	    s.master_phone "sharedBook.master_phone",
+	    s.release_time "sharedBook.release_time"
 	  from success_borrowed sb
 	  inner join sharedbook s on sb.book_id = s.book_id
-	  order by sb.create_time desc limit #{offset},#{limmit}
+	  order by sb.create_time desc limit #{offset},#{limit}
 	</select>
 </mapper>

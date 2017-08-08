@@ -11,7 +11,7 @@
 	  values
 	    (#{bookId},#{masterPhone})
 	</insert>
-	<select id="queryByIdWithSharedBook" resultType="SuccessShared">
+	<select id="queryByIdWithBorrowedBook" resultType="SuccessLended">
 	<!-- 根据id查询SuccessLended并携带borrowedBook实体 -->
 	<!-- 通过别名告诉mybatis把结果映射到SuccessLended同时映射到borrowedBook属性 -->
 	  select
@@ -20,20 +20,24 @@
 	    sl.create_time,
 	    b.book_id "borrowedBook.book_id",
 	    b.book_name "borrowedBook.book_name",
-	    b.borrower_phone "borrowedBook.borrower_phone"
+	    b.book_description "borrowedBook.book_description",
+	    b.borrower_phone "borrowedBook.borrower_phone",
+	    b.release_time "borrowedBook.release_time"
 	  from success_lended sl
 	  inner join borrowedbook b on sl.book_id = b.book_id
 	  where sl.book_id = #{bookId}
 	</select>
 	
-	<select id="querySuccessLendedListByMasterPhone" parameterType="String" resultType="SuccessShared">
+	<select id="querySuccessLendedListByMasterPhone" parameterType="String" resultType="SuccessLended">
 	  select
 	    sl.book_id,
 	    sl.master_phone,
 	    sl.create_time,
 	    b.book_id "borrowedBook.book_id",
 	    b.book_name "borrowedBook.book_name",
-	    b.borrower_phone "borrowedBook.borrower_phone"
+	    b.book_description "borrowedBook.book_description",
+	    b.borrower_phone "borrowedBook.borrower_phone",
+	    b.release_time "borrowedBook.release_time"
 	  from success_lended sl
 	  inner join borrowedbook b on sl.book_id = b.book_id
 	  where sl.master_phone = #{masterPhone}
@@ -55,7 +59,9 @@
 	    sl.create_time,
 	    b.book_id "borrowedBook.book_id",
 	    b.book_name "borrowedBook.book_name",
-	    b.borrower_phone "borrowedBook.borrower_phone"
+	    b.book_description "borrowedBook.book_description",
+	    b.borrower_phone "borrowedBook.borrower_phone",
+	    b.release_time "borrowedBook.release_time"
 	  from success_lended sl
 	  inner join borrowedbook b on sl.book_id = b.book_id
 	</select>
@@ -67,16 +73,18 @@
 	    success_lended
 	</select>
 	
-	<select id="querySuccessLendedList" resultType="SuccessBorrowed">
+	<select id="querySuccessLendedList" resultType="SuccessLended">
 	  select
 	    sl.book_id,
 	    sl.master_phone,
 	    sl.create_time,
 	    b.book_id "borrowedBook.book_id",
 	    b.book_name "borrowedBook.book_name",
-	    b.borrower_phone "borrowedBook.borrower_phone"
+	    b.book_description "borrowedBook.book_description",
+	    b.borrower_phone "borrowedBook.borrower_phone",
+	    b.release_time "borrowedBook.release_time"
 	  from success_lended sl
 	  inner join borrowedbook b on sl.book_id = b.book_id
-	  order by sl.create_time desc limit #{offset},#{limmit}
+	  order by sl.create_time desc limit #{offset},#{limit}
 	</select>
 </mapper>

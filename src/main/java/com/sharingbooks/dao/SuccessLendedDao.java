@@ -1,6 +1,7 @@
 package com.sharingbooks.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sharingbooks.entity.SuccessLended;
@@ -19,6 +20,12 @@ public interface SuccessLendedDao {
 	 */
 	public int insertSuccessLended(@Param(value = "bookId") long bookId, @Param(value = "masterPhone") String masterPhone);
 	
+	/**
+	 * 根据id查询SuccessLended并携带借出书籍对象实体
+	 * @param bookId
+	 * @return
+	 */
+	public SuccessLended queryByIdWithBorrowedBook(long bookId);
 	/**
 	 * 用户查询自己的借出成功明细表
 	 * @param masterPhone 用户电话号码
