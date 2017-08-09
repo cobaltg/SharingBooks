@@ -11,16 +11,16 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.sharingbooks.entity.UserInfo;
 
 /**
- * ÅäÖÃspringºÍJunitÕûºÏ£¬JunitÆô¶¯Ê±¼ÓÔØspringIOCÈÝÆ÷
+ * é…ç½®springå’ŒJunitæ•´åˆï¼ŒJunitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
  * 
  */
-//JunitÆô¶¯Ê±¼ÓÔØspringIOCÈÝÆ÷
+//Junitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
 @RunWith(SpringJUnit4ClassRunner.class)
-//¸æËßjunit springµÄÅäÖÃÎÄ¼þ
+//å‘Šè¯‰junit springçš„é…ç½®æ–‡ä»¶
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class UserInfoDaoTest {
 	
-	//×¢ÈëDaoÊµÏÖÀàÒÀÀµ
+	//æ³¨å…¥Daoå®žçŽ°ç±»ä¾èµ–
 	@Autowired
 	private UserInfoDao userInfoDao;
 
@@ -31,7 +31,7 @@ public class UserInfoDaoTest {
 		UserInfo userinfo=userInfoDao.queryById(id);
 		System.out.println(userinfo);		
 	}
-//²âÊÔ½á¹û£º	
+//æµ‹è¯•ç»“æžœï¼š	
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]
 	
 	@Test
@@ -39,7 +39,7 @@ public class UserInfoDaoTest {
 		int result=userInfoDao.addUser("Monical","monical","18715647645");
 		System.out.println(result);
 	}
-//²âÊÔ½á¹û£º
+//æµ‹è¯•ç»“æžœï¼š
 //	[main] DEBUG c.s.dao.UserInfoDao.addUser - ==>  Preparing: insert into userinfo (user_name,user_pwd,user_phone) values (?,?,?) 
 //	[main] DEBUG c.s.dao.UserInfoDao.addUser - ==> Parameters: Monical(String), monical(String), 18715647645(String)
 //	[main] DEBUG c.s.dao.UserInfoDao.addUser - <==    Updates: 1
@@ -47,10 +47,10 @@ public class UserInfoDaoTest {
 	
 	@Test
 	public void testUpdateUser() {
-		int i=userInfoDao.updateUser("", "monical", "",8);
+		int i=userInfoDao.updateUser("Monical", "Monical", "18715647645",8);
 		System.out.println(i);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	[main] DEBUG c.s.dao.UserInfoDao.updateUser - ==>  Preparing: update userinfo set user_name=?, user_pwd=?, user_phone=? where user_id=? 
 //	[main] DEBUG c.s.dao.UserInfoDao.updateUser - ==> Parameters: Monical(String), Monical(String), 18715647645(String), 8(Long)
 //	[main] DEBUG c.s.dao.UserInfoDao.updateUser - <==    Updates: 1
@@ -61,7 +61,7 @@ public class UserInfoDaoTest {
 		int i=userInfoDao.reduceUser(7);
 		System.out.println(i);
 	}
-//²âÊÔ½á¹û£º
+//æµ‹è¯•ç»“æžœï¼š
 //	[main] DEBUG c.s.dao.UserInfoDao.reduceUser - ==>  Preparing: delete from userinfo where user_id=? 
 //	[main] DEBUG c.s.dao.UserInfoDao.reduceUser - ==> Parameters: 7(Long)
 //	[main] DEBUG c.s.dao.UserInfoDao.reduceUser - <==    Updates: 1
@@ -73,7 +73,7 @@ public class UserInfoDaoTest {
 		System.out.println(userInfoDao.getUser("", "vivian", "18179868764"));
 		System.out.println(userInfoDao.getUser("Vivian", "vvian", "18179868764"));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@2e8ab815]
 //	1
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7bdf6bb7]
@@ -86,7 +86,7 @@ public class UserInfoDaoTest {
 		UserInfo userinfo=userInfoDao.getUserById(6);
 		System.out.println(userinfo);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]
 	
 	@Test
@@ -94,7 +94,7 @@ public class UserInfoDaoTest {
 		UserInfo userinfo=userInfoDao.getUserByName("Vivian");
 		System.out.println(userinfo);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]	
 	
 	@Test
@@ -102,15 +102,9 @@ public class UserInfoDaoTest {
 		UserInfo userinfo=userInfoDao.getUserByPhone("18179868764");
 		System.out.println(userinfo);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]		
 	
-	@Test 
-	public void testCountUserInfo(){
-		System.out.println(userInfoDao.countUserInfo());
-	}
-//²âÊÔ½á¹û
-//	3
 	@Test
 	public void testQueryUserInfoList() {
 		List<UserInfo> list=userInfoDao.queryUserInfoList(0, 100);
@@ -118,7 +112,7 @@ public class UserInfoDaoTest {
 			System.out.println(userinfo);
 		}
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æžœ
 //	UserInfo [userId=5, userName=Joey, userPwd=joey, userPhone=18176048764]
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]
 //	UserInfo [userId=8, userName=Monical, userPwd=Monical, userPhone=18715647645]

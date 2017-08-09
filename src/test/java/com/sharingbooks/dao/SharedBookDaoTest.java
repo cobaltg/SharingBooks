@@ -12,15 +12,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.sharingbooks.entity.SharedBook;
 
 /**
- * ÅäÖÃspringºÍJunitÕûºÏ£¬JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+ * é…ç½®springå’ŒJunitæ•´åˆï¼ŒJunitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
  */
-//JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+//Junitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
 @RunWith(SpringJUnit4ClassRunner.class)
-//¸æËßjunit springµÄÅäÖÃÎÄ¼ş
+//å‘Šè¯‰junit springçš„é…ç½®æ–‡ä»¶
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class SharedBookDaoTest {
 	
-	//×¢ÈëDaoÊµÏÖÀàÒÀÀµ
+	//æ³¨å…¥Daoå®ç°ç±»ä¾èµ–
 	@Autowired
 	private SharedBookDao sharedBookDao;
 	
@@ -29,13 +29,13 @@ public class SharedBookDaoTest {
 		SharedBook sharedBook = sharedBookDao.querySharedBookById(1);
 		System.out.println(sharedBook);
 	}
-//²âÊÔ½á¹û
-//	SharedBook [bookId=1, bookName=¡¶Ëã·¨µ¼ÂÛ¡·, bookDescription=Stein£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13476587398, releaseTime=2017-05-23]
+//æµ‹è¯•ç»“æœ
+//	SharedBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13476587398, releaseTime=2017-05-23]
 
 	@Test
 	public void testQueryShareBookByBookInfo() {
-		List<SharedBook> list=sharedBookDao.queryShareBookByBookInfo("Ëã·¨", "");
-		List<SharedBook> list2=sharedBookDao.queryShareBookByBookInfo("Ëã·¨", "»úĞµ");
+		List<SharedBook> list=sharedBookDao.queryShareBookByBookInfo("ç®—æ³•", "");
+		List<SharedBook> list2=sharedBookDao.queryShareBookByBookInfo("ç®—æ³•", "æœºæ¢°");
 		for(SharedBook sharedBook: list){
 			System.out.println(sharedBook);
 		}
@@ -44,24 +44,24 @@ public class SharedBookDaoTest {
 			System.out.println(sharedBook);
 		}
 	}
-//²âÊÔ½á¹û
-//	SharedBook [bookId=1, bookName=¡¶Ëã·¨µ¼ÂÛ¡·, bookDescription=Stein£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13476587398, releaseTime=2017-05-23]
-//	SharedBook [bookId=7, bookName=¡¶Ëã·¨¾ºÈüÈëÃÅ¾­µä¡·, bookDescription=ÁõÈê¼Ñ£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=13476587387, releaseTime=2017-05-23]
-//	SharedBook [bookId=8, bookName=¡¶¼ÆËã»úËã·¨Éè¼ÆÓë·ÖÎö¡·, bookDescription=ÍõÏş¶«£¬µç×Ó¹¤Òµ³ö°æÉç, masterPhone=18716576498, releaseTime=2017-05-23]
-//	SharedBook [bookId=13, bookName=¡¶Ëã·¨¾ºÈüÈëÃÅ¾­µä¡·, bookDescription=ÁõÈê¼Ñ£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=13476587387, releaseTime=2017-05-23]
-//	SharedBook [bookId=14, bookName=¡¶¼ÆËã»úËã·¨Éè¼ÆÓë·ÖÎö¡·, bookDescription=ÍõÏş¶«£¬µç×Ó¹¤Òµ³ö°æÉç, masterPhone=18716576498, releaseTime=2017-05-23]
+//æµ‹è¯•ç»“æœ
+//	SharedBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13476587398, releaseTime=2017-05-23]
+//	SharedBook [bookId=7, bookName=ã€Šç®—æ³•ç«èµ›å…¥é—¨ç»å…¸ã€‹, bookDescription=åˆ˜æ±ä½³ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13476587387, releaseTime=2017-05-23]
+//	SharedBook [bookId=8, bookName=ã€Šè®¡ç®—æœºç®—æ³•è®¾è®¡ä¸åˆ†æã€‹, bookDescription=ç‹æ™“ä¸œï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576498, releaseTime=2017-05-23]
+//	SharedBook [bookId=13, bookName=ã€Šç®—æ³•ç«èµ›å…¥é—¨ç»å…¸ã€‹, bookDescription=åˆ˜æ±ä½³ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13476587387, releaseTime=2017-05-23]
+//	SharedBook [bookId=14, bookName=ã€Šè®¡ç®—æœºç®—æ³•è®¾è®¡ä¸åˆ†æã€‹, bookDescription=ç‹æ™“ä¸œï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576498, releaseTime=2017-05-23]
 //	-----------------------------------------
-//	SharedBook [bookId=1, bookName=¡¶Ëã·¨µ¼ÂÛ¡·, bookDescription=Stein£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13476587398, releaseTime=2017-05-23]
+//	SharedBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13476587398, releaseTime=2017-05-23]
 	
 	@Test
 	public void testCountSharedBook() {
 		System.out.println(sharedBookDao.countSharedBook("", ""));
 		System.out.println("-----------------------------------------");
-		System.out.println(sharedBookDao.countSharedBook("Ëã·¨", ""));
+		System.out.println(sharedBookDao.countSharedBook("ç®—æ³•", ""));
 		System.out.println("-----------------------------------------");
-		System.out.println(sharedBookDao.countSharedBook("Ëã·¨", "»úĞµ"));	
+		System.out.println(sharedBookDao.countSharedBook("ç®—æ³•", "æœºæ¢°"));	
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	21
 //	-----------------------------------------
 //	5
@@ -80,51 +80,76 @@ public class SharedBookDaoTest {
 			System.out.println(sharedBook);
 		}
 	}
-//²âÊÔ½á¹û
-//	SharedBook [bookId=1, bookName=¡¶Ëã·¨µ¼ÂÛ¡·, bookDescription=Stein£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13476587398, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=2, bookName=¡¶Think in Java¡·, bookDescription=Eckel£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=3, bookName=¡¶ÉîÈëÀí½âJava Web¼¼ÊõÄÚÄ»¡·, bookDescription=ĞíÁî²¨£¬µç×Ó¹¤Òµ³ö°æÉç, masterPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=4, bookName=¡¶JavaºËĞÄ¼¼Êõ¾íÒ»¡·, bookDescription=Horstmann£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=5, bookName=¡¶±àÒëÔ­Àí¡·, bookDescription=ÕÅËØÇÙ£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=13878759873, releaseTime=Tue May 23 00:00:00 CST 2017]
+//æµ‹è¯•ç»“æœ
+//	SharedBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13476587398, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=2, bookName=ã€ŠThink in Javaã€‹, bookDescription=Eckelï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=3, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=4, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=5, bookName=ã€Šç¼–è¯‘åŸç†ã€‹, bookDescription=å¼ ç´ ç´ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13878759873, releaseTime=Tue May 23 00:00:00 CST 2017]
 //	-----------------------------------------
-//	SharedBook [bookId=6, bookName=¡¶¼ÆËã»ú²Ù×÷ÏµÍ³¡·, bookDescription=ÌÀĞ¡µ¤£¬Î÷°²µç×Ó¿Æ¼¼´óÑ§³ö°æÉç, masterPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=7, bookName=¡¶Ëã·¨¾ºÈüÈëÃÅ¾­µä¡·, bookDescription=ÁõÈê¼Ñ£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=13476587387, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=8, bookName=¡¶¼ÆËã»úËã·¨Éè¼ÆÓë·ÖÎö¡·, bookDescription=ÍõÏş¶«£¬µç×Ó¹¤Òµ³ö°æÉç, masterPhone=18716576498, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=9, bookName=¡¶ÉîÈëÀí½âJava Web¼¼ÊõÄÚÄ»¡·, bookDescription=ĞíÁî²¨£¬µç×Ó¹¤Òµ³ö°æÉç, masterPhone=18715367865, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	SharedBook [bookId=10, bookName=¡¶JavaºËĞÄ¼¼Êõ¾íÒ»¡·, bookDescription=Horstmann£¬»úĞµ¹¤Òµ³ö°æÉç, masterPhone=13748475867, releaseTime=Tue May 23 00:00:00 CST 2017]
-			
+//	SharedBook [bookId=6, bookName=ã€Šè®¡ç®—æœºæ“ä½œç³»ç»Ÿã€‹, bookDescription=æ±¤å°ä¸¹ï¼Œè¥¿å®‰ç”µå­ç§‘æŠ€å¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=7, bookName=ã€Šç®—æ³•ç«èµ›å…¥é—¨ç»å…¸ã€‹, bookDescription=åˆ˜æ±ä½³ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13476587387, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=8, bookName=ã€Šè®¡ç®—æœºç®—æ³•è®¾è®¡ä¸åˆ†æã€‹, bookDescription=ç‹æ™“ä¸œï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576498, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=9, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18715367865, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=10, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13748475867, releaseTime=Tue May 23 00:00:00 CST 2017]
+	
+	@Test
+	public void testQuerySharedBookListByPage(){
+		List<SharedBook> list=sharedBookDao.querySharedBookListByPage("ç®—","",0, 5);
+		List<SharedBook> list1=sharedBookDao.querySharedBookListByPage("","",5, 5);
+		for(SharedBook sharedBook: list){
+			System.out.println(sharedBook);
+		}
+		System.out.println("-----------------------------------------");
+		for(SharedBook sharedBook: list1){
+			System.out.println(sharedBook);
+		}
+	}
+//æµ‹è¯•ç»“æœ
+//	SharedBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13476587398, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=6, bookName=ã€Šè®¡ç®—æœºæ“ä½œç³»ç»Ÿã€‹, bookDescription=æ±¤å°ä¸¹ï¼Œè¥¿å®‰ç”µå­ç§‘æŠ€å¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=7, bookName=ã€Šç®—æ³•ç«èµ›å…¥é—¨ç»å…¸ã€‹, bookDescription=åˆ˜æ±ä½³ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13476587387, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=8, bookName=ã€Šè®¡ç®—æœºç®—æ³•è®¾è®¡ä¸åˆ†æã€‹, bookDescription=ç‹æ™“ä¸œï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576498, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=12, bookName=ã€Šè®¡ç®—æœºæ“ä½œç³»ç»Ÿã€‹, bookDescription=æ±¤å°ä¸¹ï¼Œè¥¿å®‰ç”µå­ç§‘æŠ€å¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837789, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	-----------------------------------------
+//	SharedBook [bookId=6, bookName=ã€Šè®¡ç®—æœºæ“ä½œç³»ç»Ÿã€‹, bookDescription=æ±¤å°ä¸¹ï¼Œè¥¿å®‰ç”µå­ç§‘æŠ€å¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=7, bookName=ã€Šç®—æ³•ç«èµ›å…¥é—¨ç»å…¸ã€‹, bookDescription=åˆ˜æ±ä½³ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=13476587387, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=8, bookName=ã€Šè®¡ç®—æœºç®—æ³•è®¾è®¡ä¸åˆ†æã€‹, bookDescription=ç‹æ™“ä¸œï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18716576498, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=9, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=18715367865, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=10, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, masterPhone=13748475867, releaseTime=Tue May 23 00:00:00 CST 2017]
+	
 	@Test
 	public void testAddSharedBook() {
 		SharedBook sharedBook=new SharedBook();
-		sharedBook.setBookName("¡¶×··çóİµÄÈË¡·");
-		sharedBook.setBookDescription("ÀÊÈüÄá£¬ÊÀ½ç³ö°æ¼¯ÍÅ");
+		sharedBook.setBookName("ã€Šè¿½é£ç­çš„äººã€‹");
+		sharedBook.setBookDescription("æœ—èµ›å°¼ï¼Œä¸–ç•Œå‡ºç‰ˆé›†å›¢");
 		sharedBook.setMasterPhone("13487698574");
 		sharedBook.setReleaseTime(new Date());
 		sharedBookDao.addSharedBook(sharedBook);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG c.s.dao.SharedBookDao.addSharedBook - <==    Updates: 1
 
 	@Test
 	public void testReduceSharedBook() {
 		System.out.println(sharedBookDao.reduceSharedBook(23));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@67af833b]
 //	1
 	
 	@Test
 	public void testReduceSharedBookByShared() {
-		System.out.println(sharedBookDao.reduceSharedBookByShared("¡¶±àÒëÔ­Àí¡·", "13878759898"));
+		System.out.println(sharedBookDao.reduceSharedBookByShared("ã€Šç¼–è¯‘åŸç†ã€‹", "13878759898"));
 	}
-//²âÊÔ½á¹û£º
+//æµ‹è¯•ç»“æœï¼š
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@287f94b1]
-//	2 £¨²âÊÔÊı¾İÖĞÓĞÁ½ÌõÒ»ÑùµÄÊı¾İ£©
+//	2 ï¼ˆæµ‹è¯•æ•°æ®ä¸­æœ‰ä¸¤æ¡ä¸€æ ·çš„æ•°æ®ï¼‰
 	@Test
 	public void testUpdateSharedBook() {
-		System.out.println(sharedBookDao.updateSharedBook("", "¿¨ÀÕµÂ¡¤ÀÊÈüÄá", 24));
+		System.out.println(sharedBookDao.updateSharedBook("", "å¡å‹’å¾·Â·æœ—èµ›å°¼", 24));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@7646731d]
 //	1
 

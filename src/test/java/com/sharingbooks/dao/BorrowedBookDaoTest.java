@@ -12,15 +12,15 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.sharingbooks.entity.BorrowedBook;
 
 /**
- * ÅäÖÃspringºÍJunitÕûºÏ£¬JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+ * é…ç½®springå’ŒJunitæ•´åˆï¼ŒJunitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
  */
-//JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+//Junitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
 @RunWith(SpringJUnit4ClassRunner.class)
-//¸æËßjunit springµÄÅäÖÃÎÄ¼ş
+//å‘Šè¯‰junit springçš„é…ç½®æ–‡ä»¶
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class BorrowedBookDaoTest {
 	
-	//×¢ÈëDaoÊµÏÖÀàÒÀÀµ
+	//æ³¨å…¥Daoå®ç°ç±»ä¾èµ–
 	@Autowired
 	private BorrowedBookDao borrowedBookDao;
 	
@@ -29,8 +29,8 @@ public class BorrowedBookDaoTest {
 		BorrowedBook borrowbook=borrowedBookDao.queryBorrowedBookById(15);
 		System.out.println(borrowbook);
 	}
-//²âÊÔ½á¹û
-//	borrowerBook [bookId=15, bookName=¡¶TCP/IPÏêÏ¸¾íÒ»¡·, bookDescription=Ë¹µÙÎÄË¹£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
+//æµ‹è¯•ç»“æœ
+//	borrowerBook [bookId=15, bookName=ã€ŠTCP/IPè¯¦ç»†å·ä¸€ã€‹, bookDescription=æ–¯è’‚æ–‡æ–¯ï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18777837798, releaseTime=Tue May 23 00:00:00 CST 2017]
 
 	@Test
 	public void testQueryBorrowedBookByBookInfo() {
@@ -44,24 +44,24 @@ public class BorrowedBookDaoTest {
 			System.out.println(borrowedBook);
 		}
 	}
-//²âÊÔ½á¹û
-//	borrowerBook [bookId=2, bookName=¡¶Think in Java¡·, bookDescription=Eckel£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=3, bookName=¡¶ÉîÈëÀí½âJava Web¼¼ÊõÄÚÄ»¡·, bookDescription=ĞíÁî²¨£¬µç×Ó¹¤Òµ³ö°æÉç, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=4, bookName=¡¶JavaºËĞÄ¼¼Êõ¾íÒ»¡·, bookDescription=Horstmann£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=9, bookName=¡¶ÉîÈëÀí½âJava Web¼¼ÊõÄÚÄ»¡·, bookDescription=ĞíÁî²¨£¬µç×Ó¹¤Òµ³ö°æÉç, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=10, bookName=¡¶JavaºËĞÄ¼¼Êõ¾íÒ»¡·, bookDescription=Horstmann£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
+//æµ‹è¯•ç»“æœ
+//	borrowerBook [bookId=2, bookName=ã€ŠThink in Javaã€‹, bookDescription=Eckelï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=3, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=4, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=9, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=10, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
 //	-----------------------------------------
-//	borrowerBook [bookId=2, bookName=¡¶Think in Java¡·, bookDescription=Eckel£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=2, bookName=ã€ŠThink in Javaã€‹, bookDescription=Eckelï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
 	
 	@Test
 	public void testCountBorrowedBook() {
 		System.out.println(borrowedBookDao.countBorrowedBook("",""));
 		System.out.println("-----------------------------------------");
-		System.out.println(borrowedBookDao.countBorrowedBook("Ëã·¨", ""));
+		System.out.println(borrowedBookDao.countBorrowedBook("ç®—æ³•", ""));
 		System.out.println("-----------------------------------------");
-		System.out.println(borrowedBookDao.countBorrowedBook("Ëã·¨", "µç×Ó"));	
+		System.out.println(borrowedBookDao.countBorrowedBook("ç®—æ³•", "ç”µå­"));	
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	15
 //	-----------------------------------------
 //	1
@@ -80,49 +80,49 @@ public class BorrowedBookDaoTest {
 			System.out.println(borrowedBook);
 		}
 	}
-//²âÊÔ½á¹û
-//	borrowerBook [bookId=1, bookName=¡¶Ëã·¨µ¼ÂÛ¡·, bookDescription=Stein£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=13476587398, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=2, bookName=¡¶Think in Java¡·, bookDescription=Eckel£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
+//æµ‹è¯•ç»“æœ
+//	borrowerBook [bookId=1, bookName=ã€Šç®—æ³•å¯¼è®ºã€‹, bookDescription=Steinï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=13476587398, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=2, bookName=ã€ŠThink in Javaã€‹, bookDescription=Eckelï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18716576483, releaseTime=Tue May 23 00:00:00 CST 2017]
 //	-----------------------------------------
-//	borrowerBook [bookId=3, bookName=¡¶ÉîÈëÀí½âJava Web¼¼ÊõÄÚÄ»¡·, bookDescription=ĞíÁî²¨£¬µç×Ó¹¤Òµ³ö°æÉç, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
-//	borrowerBook [bookId=4, bookName=¡¶JavaºËĞÄ¼¼Êõ¾íÒ»¡·, bookDescription=Horstmann£¬»úĞµ¹¤Òµ³ö°æÉç, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=3, bookName=ã€Šæ·±å…¥ç†è§£Java WebæŠ€æœ¯å†…å¹•ã€‹, bookDescription=è®¸ä»¤æ³¢ï¼Œç”µå­å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=18775367896, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=4, bookName=ã€ŠJavaæ ¸å¿ƒæŠ€æœ¯å·ä¸€ã€‹, bookDescription=Horstmannï¼Œæœºæ¢°å·¥ä¸šå‡ºç‰ˆç¤¾, borrowerPhone=13748475873, releaseTime=Tue May 23 00:00:00 CST 2017]
 
 	@Test
 	public void testAddBorrowedBook() {
 		BorrowedBook borrowedBook=new BorrowedBook();
-		borrowedBook.setBookName("¡¶×··çóİµÄÈË¡·");
-		borrowedBook.setBookDescription("ÀÊÈüÄá£¬ÊÀ½ç³ö°æ¼¯ÍÅ");
+		borrowedBook.setBookName("ã€Šè¿½é£ç­çš„äººã€‹");
+		borrowedBook.setBookDescription("æœ—èµ›å°¼ï¼Œä¸–ç•Œå‡ºç‰ˆé›†å›¢");
 		borrowedBook.setBorrowerPhone("13487698574");
 		borrowedBook.setReleaseTime(new Date());
 		borrowedBookDao.addBorrowedBook(borrowedBook);
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	17:18:47.307 [main] DEBUG c.s.d.B.addBorrowedBook - <==    Updates: 1
 	
 	@Test
 	public void testReduceBorrowedBook() {
 		System.out.println(borrowedBookDao.reduceBorrowedBook(11));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@158d255c]
 //	1
 
 	@Test
 	public void testReduceSharedBookByBorrowed() {
-		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("¡¶±àÒëÔ­Àí¡·", "13878759898"));
+		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("ã€Šç¼–è¯‘åŸç†ã€‹", "13878759898"));
 		System.out.println("-----------------------------------------");
-		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("¡¶±àÒëÔ­Àí¡·", "13878759873"));
+		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("ã€Šç¼–è¯‘åŸç†ã€‹", "13878759873"));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	0
 //	-----------------------------------------
 //	1
 	
 	@Test
 	public void testUpdateBorrowedBook() {
-		System.out.println(borrowedBookDao.updateBorrowedBook("", "¿¨ÀÕµÂ¡¤ÀÊÈüÄá", 16));
+		System.out.println(borrowedBookDao.updateBorrowedBook("", "å¡å‹’å¾·Â·æœ—èµ›å°¼", 16));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@37d80fe7]
 //	1
 }

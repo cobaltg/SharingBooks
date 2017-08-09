@@ -45,6 +45,18 @@
 	  order by book_id limit #{offset},#{limit}
 	</select>
 	
+	<select id="querySharedBookListByPage" resultType="SharedBook">
+	  select
+	    book_id,book_name,book_description,master_phone,release_time
+	  from
+	    sharedbook
+	  <where>
+	    <if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">and book_name like '%' #{bookName} '%'</if>
+	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
+	  </where>
+	  order by book_id limit #{offset},#{limit}
+	</select>
+	
 	<insert id="addSharedBook" parameterType="SharedBook">
 	  insert into sharedbook
 	    (book_name,book_description,master_phone,release_time)
@@ -73,7 +85,4 @@
  	  where 
  	    book_id=#{bookId}
 	</update>
-	
-
-	
 </mapper>

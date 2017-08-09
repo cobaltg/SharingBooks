@@ -38,6 +38,16 @@ public interface SharedBookDao {
 	public List<SharedBook> querySharedBookList(@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
 	
 	/**
+	 * 根据分页查询符合条件的书籍信息
+	 * @param bookName
+	 * @param bookDescription
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	public List<SharedBook> querySharedBookListByPage(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription,@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
+	
+	/**
 	 * 添加可借书籍信息到可借书籍表中
 	 * @param sharedbook 书籍的所有信息
 	 * return 添加的行数

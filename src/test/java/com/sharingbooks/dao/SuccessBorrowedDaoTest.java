@@ -1,7 +1,5 @@
 package com.sharingbooks.dao;
 
-import static org.junit.Assert.*;
-
 import java.util.List;
 
 import org.junit.Test;
@@ -15,11 +13,11 @@ import com.sharingbooks.entity.SuccessBorrowed;
 
 
 /**
- * ÅäÖÃspringºÍJunitÕûºÏ£¬JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+ * é…ç½®springå’ŒJunitæ•´åˆï¼ŒJunitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
  */
-//JunitÆô¶¯Ê±¼ÓÔØspringIOCÈİÆ÷
+//Junitå¯åŠ¨æ—¶åŠ è½½springIOCå®¹å™¨
 @RunWith(SpringJUnit4ClassRunner.class)
-//¸æËßjunit springµÄÅäÖÃÎÄ¼ş
+//å‘Šè¯‰junit springçš„é…ç½®æ–‡ä»¶
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class SuccessBorrowedDaoTest {
 	
@@ -32,7 +30,7 @@ public class SuccessBorrowedDaoTest {
 		//System.out.println(successBorrowedDao.insertSuccessBorrowed(20, "18716039352"));
 		//System.out.println(successBorrowedDao.insertSuccessBorrowed(25, "18176048764"));
 	}
-//²âÊÔ½á¹û£º
+//æµ‹è¯•ç»“æœï¼š
 //	[main] DEBUG c.s.d.S.insertSuccessBorrowed - ==>  Preparing: insert into success_borrowed (book_id,borrower_phone) values (?,?) 
 //	[main] DEBUG c.s.d.S.insertSuccessBorrowed - ==> Parameters: 19(Long), 18716039352(String)
 //	[main] DEBUG c.s.d.S.insertSuccessBorrowed - <==    Updates: 1
@@ -45,10 +43,10 @@ public class SuccessBorrowedDaoTest {
 		System.out.println("-----------------------------------------");
 		System.out.println(sbook);
 	}
-//²âÊÔ½á¹û£º
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=¡¶»ã±àÓïÑÔ¡·, bookDescription=ÍõË¬£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//æµ‹è¯•ç»“æœï¼š
+//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=ã€Šæ±‡ç¼–è¯­è¨€ã€‹, bookDescription=ç‹çˆ½ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
 //	-----------------------------------------
-//	SharedBook [bookId=19, bookName=¡¶»ã±àÓïÑÔ¡·, bookDescription=ÍõË¬£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=19, bookName=ã€Šæ±‡ç¼–è¯­è¨€ã€‹, bookDescription=ç‹çˆ½ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]
 	
 	@Test
 	public void testQuerySuccessBorrowedListByBorrowerPhone() {
@@ -62,16 +60,16 @@ public class SuccessBorrowedDaoTest {
 			System.out.println(sb);
 		}
 	}
-//²âÊÔ½á¹û
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=¡¶»ã±àÓïÑÔ¡·, bookDescription=ÍõË¬£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=¡¶ÊıÖµ·ÖÎö¡·, bookDescription=ÀîÇìÑî£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//æµ‹è¯•ç»“æœ
+//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=ã€Šæ±‡ç¼–è¯­è¨€ã€‹, bookDescription=ç‹çˆ½ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=ã€Šæ•°å€¼åˆ†æã€‹, bookDescription=æåº†æ¨ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
 //	-----------------------------------------
 	
 	@Test
 	public void testCountSuccessBorrowedByBorrowerPhone() {
 		System.out.println(successBorrowedDao.countSuccessBorrowedByBorrowerPhone("18716039352"));
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	[main] DEBUG c.s.d.S.countSuccessBorrowedByBorrowerPhone - ==>  Preparing: select count(*) from success_borrowed where borrower_phone=? 
 //	[main] DEBUG c.s.d.S.countSuccessBorrowedByBorrowerPhone - ==> Parameters: 18716039352(String)
 //	2
@@ -83,16 +81,16 @@ public class SuccessBorrowedDaoTest {
 			System.out.println(s);
 		}
 	}
-//²âÊÔ½á¹û
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=¡¶»ã±àÓïÑÔ¡·, bookDescription=ÍõË¬£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=¡¶ÊıÖµ·ÖÎö¡·, bookDescription=ÀîÇìÑî£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=¡¶×··çóİµÄÈË¡·, bookDescription=ÀÊÈüÄá£¬ÊÀ½ç³ö°æ¼¯ÍÅ, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
+//æµ‹è¯•ç»“æœ
+//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=ã€Šæ±‡ç¼–è¯­è¨€ã€‹, bookDescription=ç‹çˆ½ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=ã€Šæ•°å€¼åˆ†æã€‹, bookDescription=æåº†æ¨ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=ã€Šè¿½é£ç­çš„äººã€‹, bookDescription=æœ—èµ›å°¼ï¼Œä¸–ç•Œå‡ºç‰ˆé›†å›¢, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
 	
 	@Test
 	public void testCountSuccessBorrowed() {
 		System.out.println(successBorrowedDao.countSuccessBorrowed());
 	}
-//²âÊÔ½á¹û
+//æµ‹è¯•ç»“æœ
 //	3
 	
 	@Test
@@ -107,9 +105,9 @@ public class SuccessBorrowedDaoTest {
 			System.out.println(sb);
 		}
 	}
-//²âÊÔ½á¹û
-//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=¡¶×··çóİµÄÈË¡·, bookDescription=ÀÊÈüÄá£¬ÊÀ½ç³ö°æ¼¯ÍÅ, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=¡¶ÊıÖµ·ÖÎö¡·, bookDescription=ÀîÇìÑî£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//æµ‹è¯•ç»“æœ
+//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=ã€Šè¿½é£ç­çš„äººã€‹, bookDescription=æœ—èµ›å°¼ï¼Œä¸–ç•Œå‡ºç‰ˆé›†å›¢, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
+//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=ã€Šæ•°å€¼åˆ†æã€‹, bookDescription=æåº†æ¨ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
 //	-----------------------------------------
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=¡¶»ã±àÓïÑÔ¡·, bookDescription=ÍõË¬£¬Çå»ª´óÑ§³ö°æÉç, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=ã€Šæ±‡ç¼–è¯­è¨€ã€‹, bookDescription=ç‹çˆ½ï¼Œæ¸…åå¤§å­¦å‡ºç‰ˆç¤¾, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
 }
