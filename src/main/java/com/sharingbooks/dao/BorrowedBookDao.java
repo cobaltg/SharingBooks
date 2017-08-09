@@ -1,12 +1,9 @@
 package com.sharingbooks.dao;
 
 import java.util.List;
-import java.util.Map;
-
 import org.apache.ibatis.annotations.Param;
 
 import com.sharingbooks.entity.BorrowedBook;
-import com.sharingbooks.entity.SharedBook;
 
 public interface BorrowedBookDao {
 	

@@ -6,7 +6,7 @@
 <mapper namespace="com.sharingbooks.dao.SuccessLendedDao">
 	
 	<insert id="insertSuccessLended">
-	  insert into success_lended
+	  insert ignore into success_lended
 	    (book_id,master_phone)
 	  values
 	    (#{bookId},#{masterPhone})

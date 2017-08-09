@@ -6,7 +6,7 @@
 <mapper namespace="com.sharingbooks.dao.SuccessBorrowedDao">
 
 	<insert id="insertSuccessBorrowed">
-	  insert into success_borrowed
+	  insert ignore into success_borrowed
 	    (book_id,borrower_phone)
 	  values
 	    (#{bookId},#{borrowerPhone})
