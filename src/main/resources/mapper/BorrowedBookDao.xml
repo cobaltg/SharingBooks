@@ -26,6 +26,18 @@
 	  order by book_id
 	</select>
 	
+	<select id="queryBorrowedBookListByPage" resultType="BorrowedBook">
+	  select
+	    book_id,book_name,book_description,borrower_phone,release_time
+	  from
+	    borrowedbook
+	  <where>
+	    <if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">and book_name like '%' #{bookName} '%'</if>
+	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
+	  </where>
+	  order by book_id limit #{offset},#{limit}
+	</select>
+	
 	<select id="countBorrowedBook" resultType="int">
 	  select
 	    count(*)
@@ -35,6 +47,25 @@
 	    <if test="bookName!=null and !&quot;&quot;.equals(bookName.trim())">and book_name like '%' #{bookName} '%'</if>
 	    <if test="bookDescription!=null and !&quot;&quot;.equals(bookDescription.trim())">and book_description like '%' #{bookDescription} '%'</if>
 	  </where>
+	</select>
+	
+	<select id="countqueryBorrowedBookListOfUser" resultType="int">
+	  select
+	    count(*)
+	  from
+	    borrowedbook
+	  where 
+	    borrower_phone = #{userPhone}
+	</select>
+	
+	<select id="queryBorrowedBookListOfUserByPage" resultType="BorrowedBook">
+	  select
+	    book_id,book_name,book_description,borrower_phone,release_time
+	  from
+	    borrowedbook
+	  where
+		 borrower_phone = #{userPhone}
+	  order by book_id limit #{offset},#{limit}
 	</select>
 	
 	<select id="queryBorrowedBookList" resultType="BorrowedBook">
@@ -60,7 +91,7 @@
 	  delete 
 	    from borrowedbook
 	  where
-	    book_name = #{bookName} and borrower_phone = #{userPhone}
+	    book_name = #{bookName} and book_description = #{bookDescription} and borrower_phone = #{userPhone}
 	</delete>
 	
 	<update id="updateBorrowedBook">

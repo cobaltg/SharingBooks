@@ -7,84 +7,42 @@
 	
 	<insert id="insertSuccessLended">
 	  insert ignore into success_lended
-	    (book_id,master_phone)
+	    (book_id,book_name,book_description,book_master,receiver_name,create_time)
 	  values
-	    (#{bookId},#{masterPhone})
+	    (#{bookId},#{bookName},#{bookDescription},#{bookMaster},#{receiverName},#{createTime})
 	</insert>
-	<select id="queryByIdWithBorrowedBook" resultType="SuccessLended">
-	<!-- 根据id查询SuccessLended并携带borrowedBook实体 -->
-	<!-- 通过别名告诉mybatis把结果映射到SuccessLended同时映射到borrowedBook属性 -->
-	  select
-	    sl.book_id,
-	    sl.master_phone,
-	    sl.create_time,
-	    b.book_id "borrowedBook.book_id",
-	    b.book_name "borrowedBook.book_name",
-	    b.book_description "borrowedBook.book_description",
-	    b.borrower_phone "borrowedBook.borrower_phone",
-	    b.release_time "borrowedBook.release_time"
-	  from success_lended sl
-	  inner join borrowedbook b on sl.book_id = b.book_id
-	  where sl.book_id = #{bookId}
-	</select>
-	
-	<select id="querySuccessLendedListByMasterPhone" parameterType="String" resultType="SuccessLended">
-	  select
-	    sl.book_id,
-	    sl.master_phone,
-	    sl.create_time,
-	    b.book_id "borrowedBook.book_id",
-	    b.book_name "borrowedBook.book_name",
-	    b.book_description "borrowedBook.book_description",
-	    b.borrower_phone "borrowedBook.borrower_phone",
-	    b.release_time "borrowedBook.release_time"
-	  from success_lended sl
-	  inner join borrowedbook b on sl.book_id = b.book_id
-	  where sl.master_phone = #{masterPhone}
-	</select>
-	
-	<select id="countSuccessBorrowedByMasterPhone" parameterType="String" resultType="int">
+		
+	<select id="countSuccessLendedOfUser" parameterType="String" resultType="int">
 	  select
 	    count(*)
 	  from
 	    success_lended
 	  where
-	    master_phone=#{masterPhone}
+	    book_master=#{userName}
 	</select>
 	
-	<select id="querySuccessLended" resultType="SuccessLended">
-	  select
-	    sl.book_id,
-	    sl.master_phone,
-	    sl.create_time,
-	    b.book_id "borrowedBook.book_id",
-	    b.book_name "borrowedBook.book_name",
-	    b.book_description "borrowedBook.book_description",
-	    b.borrower_phone "borrowedBook.borrower_phone",
-	    b.release_time "borrowedBook.release_time"
-	  from success_lended sl
-	  inner join borrowedbook b on sl.book_id = b.book_id
+	<select id="querySuccessLendedListOfUserByPage" resultType="SuccessLended">
+	  select 
+	    book_id,book_name,book_description,book_master,receiver_name,create_time
+	  from 
+	    success_lended
+	  where 
+	    book_master = #{userName}
+	  order by create_time desc limit #{offset},#{limit}
 	</select>
-	
-	<select id="countSuccessLended" resultType="int">
+		
+	<select id="countSuccessLendedList" resultType="int">
 	  select
 	    count(*)
 	  from
 	    success_lended
 	</select>
 	
-	<select id="querySuccessLendedList" resultType="SuccessLended">
-	  select
-	    sl.book_id,
-	    sl.master_phone,
-	    sl.create_time,
-	    b.book_id "borrowedBook.book_id",
-	    b.book_name "borrowedBook.book_name",
-	    b.book_description "borrowedBook.book_description",
-	    b.borrower_phone "borrowedBook.borrower_phone",
-	    b.release_time "borrowedBook.release_time"
-	  from success_lended sl
-	  inner join borrowedbook b on sl.book_id = b.book_id
-	  order by sl.create_time desc limit #{offset},#{limit}
+	<select id="querySuccessLendedListByPage" resultType="SuccessLended">
+	  select 
+	    book_id,book_name,book_description,book_master,receiver_name,create_time
+	  from 
+	    success_lended
+	  order by create_time desc limit #{offset},#{limit}
 	</select>
 </mapper>

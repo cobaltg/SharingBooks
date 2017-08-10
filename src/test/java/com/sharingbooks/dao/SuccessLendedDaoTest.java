@@ -1,5 +1,6 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -18,89 +19,74 @@ import com.sharingbooks.entity.SuccessLended;
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class SuccessLendedDaoTest {
 	
-	//注入对象
 	@Autowired
 	private SuccessLendedDao successLendedDao;
 	
 	@Test
 	public void testInsertSuccessLended() {
-		System.out.println(successLendedDao.insertSuccessLended(28, "18716039352"));
-//		System.out.println(successLendedDao.insertSuccessLended(27, "18716039352"));
-//		System.out.println(successLendedDao.insertSuccessLended(29, "18176048764"));
+//		int count=successLendedDao.insertSuccessLended(22, "书籍名字22", "书籍描述22", "书籍主人", "借书人", new Date());
+		int count=successLendedDao.insertSuccessLended(27, "书名27", "书籍描述27", "书籍主人", "借书人27", new Date());
+		System.out.println(count);
 	}
 //测试结果
-//	[main] DEBUG c.s.d.S.insertSuccessLended - ==> Parameters: 28(Long), 18716039352(String)
 //	[main] DEBUG c.s.d.S.insertSuccessLended - <==    Updates: 1
+//	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@79c4715d]
 //	1
 	
 	@Test
-	public void testQueryByIdWithBorrowedBook() {
-		SuccessLended successLended=successLendedDao.queryByIdWithBorrowedBook(28);
-		System.out.println(successLended);
+	public void testCountSuccessLendedOfUser() {
+		System.out.println(successLendedDao.countSuccessLendedOfUser("书籍主人18"));
 	}
 //测试结果
-//	SuccessLended [bookId=28, masterPhone=18716039352, createTime=Tue Aug 08 10:39:44 CST 2017, borrowedBook=borrowerBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	5
 	
 	@Test
-	public void querySuccessLendedListByMasterPhone() {
-		List<SuccessLended> list=successLendedDao.querySuccessLendedListByMasterPhone("18716039352");
-		List<SuccessLended> list1=successLendedDao.querySuccessLendedListByMasterPhone("18716039353");
-		for(SuccessLended sb: list){
-			System.out.println(sb);
-		}
-		System.out.println("-----------------------------------------");
-		for(SuccessLended sb: list1){
-			System.out.println(sb);
-		}
-	}
-//测试结果
-//	SuccessLended [bookId=27, masterPhone=18716039352, createTime=Tue Aug 08 10:40:52 CST 2017, borrowedBook=borrowerBook [bookId=27, bookName=《算法导论》, bookDescription=Stein，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessLended [bookId=28, masterPhone=18716039352, createTime=Tue Aug 08 10:39:44 CST 2017, borrowedBook=borrowerBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	-----------------------------------------
-	
-	@Test
-	public void countSuccessBorrowedByMasterPhone() {
-		System.out.println(successLendedDao.countSuccessBorrowedByMasterPhone("18716039352"));
-	}
-//测试结果
-//	[main] DEBUG c.s.d.S.countSuccessBorrowedByMasterPhone - ==> Parameters: 18716039352(String)
-//	[main] DEBUG c.s.d.S.countSuccessBorrowedByMasterPhone - <==      Total: 1
-//	2
-	
-	@Test
-	public void testQuerySuccessLended() {
-		List<SuccessLended> list=successLendedDao.querySuccessLended();
+	public void testQuerySuccessLendedListOfUserByPage() {
+		List<SuccessLended> list=successLendedDao.querySuccessLendedListOfUserByPage("书籍主人18", 0, 3);
+		List<SuccessLended> list2=successLendedDao.querySuccessLendedListOfUserByPage("书籍主人18", 3, 3);
 		for(SuccessLended s: list){
+			System.out.println(s);
+		}
+		System.out.println("++++++++++++++++++++++++++++");
+		for(SuccessLended s: list2){
 			System.out.println(s);
 		}
 	}
 //测试结果
-//	SuccessLended [bookId=27, masterPhone=18716039352, createTime=Tue Aug 08 10:40:52 CST 2017, borrowedBook=borrowerBook [bookId=27, bookName=《算法导论》, bookDescription=Stein，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessLended [bookId=28, masterPhone=18716039352, createTime=Tue Aug 08 10:39:44 CST 2017, borrowedBook=borrowerBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessLended [bookId=29, masterPhone=18176048764, createTime=Tue Aug 08 10:40:52 CST 2017, borrowedBook=borrowerBook [bookId=29, bookName=《深入理解Java Web技术内幕》, bookDescription=许令波，电子工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessLended [bookId=18, bookName=书名18, bookDescription=书籍描述18, bookMaster=书籍主人18, ReceiverName=借书人14, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessLended [bookId=23, bookName=书名23, bookDescription=书籍描述23, bookMaster=书籍主人18, ReceiverName=借书人, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessLended [bookId=24, bookName=书名24, bookDescription=书籍描述24, bookMaster=书籍主人18, ReceiverName=借书人, createTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++
+//	SuccessLended [bookId=25, bookName=书名25, bookDescription=书籍描述25, bookMaster=书籍主人18, ReceiverName=借书人, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessLended [bookId=26, bookName=书名26, bookDescription=书籍描述26, bookMaster=书籍主人18, ReceiverName=借书人14, createTime=Tue May 23 00:00:00 CST 2017]
 	
 	@Test
-	public void testCountSuccessLended() {
-		System.out.println(successLendedDao.countSuccessLended());
+	public void testCountSuccessLendedList() {
+		System.out.println(successLendedDao.countSuccessLendedList());
 	}
 //测试结果
-//	3
-	@Test
-	public void testQuerySuccessLendedList() {
-		List<SuccessLended> list=successLendedDao.querySuccessLendedList(0, 2);
-		List<SuccessLended> list1=successLendedDao.querySuccessLendedList(2, 2);
-		for(SuccessLended sb: list){
-			System.out.println(sb);
-		}
-		System.out.println("-----------------------------------------");
-		for(SuccessLended sb: list1){
-			System.out.println(sb);
-		}
-	}
-//测试结果
-//	SuccessLended [bookId=27, masterPhone=18716039352, createTime=Tue Aug 08 10:40:52 CST 2017, borrowedBook=borrowerBook [bookId=27, bookName=《算法导论》, bookDescription=Stein，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessLended [bookId=29, masterPhone=18176048764, createTime=Tue Aug 08 10:40:52 CST 2017, borrowedBook=borrowerBook [bookId=29, bookName=《深入理解Java Web技术内幕》, bookDescription=许令波，电子工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	-----------------------------------------
-//	SuccessLended [bookId=28, masterPhone=18716039352, createTime=Tue Aug 08 10:39:44 CST 2017, borrowedBook=borrowerBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	26
 	
+	@Test
+	public void testQuerySuccessLendedListByPage() {
+		List<SuccessLended> list=successLendedDao.querySuccessLendedListByPage(0,3);
+		List<SuccessLended> list2=successLendedDao.querySuccessLendedListByPage(3,3);
+		for(SuccessLended s: list){
+			System.out.println(s);
+		}
+		System.out.println("++++++++++++++++++++++++++++");
+		for(SuccessLended s: list2){
+			System.out.println(s);
+		}
+	}
+//测试结果
+//	（按时间倒序输出）
+//	SuccessLended [bookId=27, bookName=书名27, bookDescription=书籍描述27, bookMaster=书籍主人, ReceiverName=借书人27, createTime=Thu Aug 10 21:00:04 CST 2017]
+//	SuccessLended [bookId=22, bookName=书籍名字22, bookDescription=书籍描述22, bookMaster=书籍主人, ReceiverName=借书人, createTime=Thu Aug 10 20:46:32 CST 2017]
+//	SuccessLended [bookId=1, bookName=书名1, bookDescription=书籍描述1, bookMaster=书籍主人1, ReceiverName=借书人1, createTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++
+//	SuccessLended [bookId=2, bookName=书名2, bookDescription=书籍描述2, bookMaster=书籍主人2, ReceiverName=借书人2, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessLended [bookId=3, bookName=书名3, bookDescription=书籍描述3, bookMaster=书籍主人3, ReceiverName=借书人3, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessLended [bookId=4, bookName=书名4, bookDescription=书籍描述4, bookMaster=书籍主人4, ReceiverName=借书人4, createTime=Tue May 23 00:00:00 CST 2017]
+
 }

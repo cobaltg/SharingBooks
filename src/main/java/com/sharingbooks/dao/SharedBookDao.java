@@ -38,6 +38,20 @@ public interface SharedBookDao {
 	public List<SharedBook> querySharedBookList(@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
 	
 	/**
+	 * 查詢用戶自己的可借書籍的信息的條數
+	 */
+	public int countquerySharedBookListOfUser(@Param(value = "userPhone") String userPhone);
+	
+	/**
+	 * 根据查询条件来查询用户的自己的可借书籍记录，按分页返回
+	 * @param userName
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	public List<SharedBook> querySharedBookListOfUserByPage(@Param(value = "userPhone") String userPhone,@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
+	
+	/**
 	 * 根据分页查询符合条件的书籍信息
 	 * @param bookName
 	 * @param bookDescription
@@ -68,7 +82,7 @@ public interface SharedBookDao {
 	 * @param userPhone 分享书籍用户的联系方式
 	 * @return
 	 */
-	public  int reduceSharedBookByShared(@Param(value = "bookName") String bookName, @Param(value = "userPhone") String userPhone);
+	public  int reduceSharedBookByShared(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription, @Param(value = "userPhone") String userPhone);
 	
 	/**
 	 * 更改可借书籍的信息

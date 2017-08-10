@@ -156,3 +156,31 @@ alter table success_borrowed drop book_name, drop book_master;
 alter table success_lended change list_id book_id bigint NOT NULL AUTO_INCREMENT COMMENT '明细表编号';
 --删除字段book_name, 字段book_master
 alter table success_lended drop book_name, drop book_borrower;
+
+-- 重新设计成功借阅书籍表
+-- 删除原来的表格
+drop table success_borrowed;
+-- 重新创建表格
+create table success_borrowed(
+book_id bigint NOT NULL COMMENT '明细表编号（借阅书籍编号）',
+book_name varchar(64) NOT NULL COMMENT '借阅籍书名称',
+book_description varchar(256) NOT NULL COMMENT '借阅书籍描述',
+book_master varchar(64) NOT NULL COMMENT '书籍主人',
+borrower_name varchar(64) NOT NULL COMMENT '借书人',
+create_time timestamp  NOT NULL COMMENT '创建时间',
+PRIMARY KEY(book_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借阅书籍成功明细表';
+
+-- 重新设计成功借出书籍表
+-- 删除原来的表格
+drop table success_lended;
+-- 重新创建表格
+create table success_lended(
+book_id bigint NOT NULL COMMENT '明细表编号（借出书籍编号）',
+book_name varchar(64) NOT NULL COMMENT '借出籍书名称',
+book_description varchar(256) NOT NULL COMMENT '借出书籍描述',
+book_master varchar(64) NOT NULL COMMENT '书籍主人',
+receiver_name varchar(64) NOT NULL COMMENT '接收书籍人',
+create_time timestamp NOT NULL COMMENT '创建时间',
+PRIMARY KEY(book_id)
+)ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='借出书籍成功明细表';

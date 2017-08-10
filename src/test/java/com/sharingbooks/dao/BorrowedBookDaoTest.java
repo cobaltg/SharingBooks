@@ -21,7 +21,7 @@ import com.sharingbooks.entity.BorrowedBook;
 public class BorrowedBookDaoTest {
 	
 	//注入Dao实现类依赖
-	@Autowired
+	@Autowired   
 	private BorrowedBookDao borrowedBookDao;
 	
 	@Test
@@ -69,6 +69,31 @@ public class BorrowedBookDaoTest {
 //	0
 	
 	@Test
+	public void testtestCountqueryBorrowedBookListOfUser(){
+		System.out.println(borrowedBookDao.countqueryBorrowedBookListOfUser("18716039352"));
+	}
+//测试结果
+//	3
+	
+	@Test
+	public void testQueryBorrowedBookListOfUserByPage(){
+		List<BorrowedBook> list=borrowedBookDao.queryBorrowedBookListOfUserByPage("18716039352", 0, 2);
+		List<BorrowedBook> list1=borrowedBookDao.queryBorrowedBookListOfUserByPage("18716039352", 2, 2);
+		for(BorrowedBook b:list){
+			System.out.println(b);
+		}
+		System.out.println("++++++++++++++++++++++++++++++");
+		for(BorrowedBook b:list1){
+			System.out.println(b);
+		}
+	}
+//测试结果
+//	borrowerBook [bookId=27, bookName=《算法导论》, bookDescription=Stein，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	borrowerBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++++
+//	borrowerBook [bookId=29, bookName=《深入理解Java Web技术内幕》, bookDescription=许令波，电子工业出版社, borrowerPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+	
+	@Test
 	public void testQueryBorrowedBookList() {
 		List<BorrowedBook> list=borrowedBookDao.queryBorrowedBookList(0, 2);
 		List<BorrowedBook> list1=borrowedBookDao.queryBorrowedBookList(2, 2);
@@ -109,9 +134,9 @@ public class BorrowedBookDaoTest {
 
 	@Test
 	public void testReduceSharedBookByBorrowed() {
-		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("《编译原理》", "13878759898"));
+		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("《编译原理》","", "13878759898"));
 		System.out.println("-----------------------------------------");
-		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("《编译原理》", "13878759873"));
+		System.out.println(borrowedBookDao.reduceBorrowedBookByBorrowed("《编译原理》","","13878759873"));
 	}
 //测试结果
 //	0

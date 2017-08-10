@@ -1,5 +1,6 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -13,48 +14,54 @@ import com.sharingbooks.entity.SuccessLended;
 public interface SuccessLendedDao {
 
 	/**
-	 * 插入借出明细
-	 * @param bookId 书籍id
-	 * @param masterPhone 借出人电话号码
-	 * @return
-	 */
-	public int insertSuccessLended(@Param(value = "bookId") long bookId, @Param(value = "masterPhone") String masterPhone);
-	
-	/**
-	 * 根据id查询SuccessLended并携带借出书籍对象实体
+	 * 插入成功借出书籍明细
 	 * @param bookId
+	 * @param bookName
+	 * @param bookDescription
+	 * @param bookMaster
+	 * @param borrowerName
+	 * @param createTime
 	 * @return
 	 */
-	public SuccessLended queryByIdWithBorrowedBook(long bookId);
-	/**
-	 * 用户查询自己的借出成功明细表
-	 * @param masterPhone 用户电话号码
-	 * @return
-	 */
-	public List<SuccessLended> querySuccessLendedListByMasterPhone(String masterPhone);
-	
+	public int insertSuccessLended(@Param(value = "bookId") long bookId,
+			@Param(value = "bookName") String bookName,
+			@Param(value = "bookDescription") String bookDescription,
+			@Param(value = "bookMaster") String bookMaster,
+			@Param(value = "receiverName") String receiverName,
+			@Param(value = "createTime") Date createTime);
+		
 	/**
 	 * 根据查询条件查询用户的借出明细表的条数
-	 */
-	public int countSuccessBorrowedByMasterPhone(String masterPhone);
-	
-	/**
-	 * 查询所有成功借出明细信息
+	 * @param userName
 	 * @return
 	 */
-	public List<SuccessLended> querySuccessLended();
+	public int countSuccessLendedOfUser(String userName);
+	
+	/**
+	 * 用户查询自己的成功借出明细，然后按页返回
+	 * @param offset
+	 * @param limit
+	 * @return
+	 */
+	public List<SuccessLended> querySuccessLendedListOfUserByPage(
+			@Param(value = "userName") String userName,
+			@Param(value = "offset") int offset,
+			@Param(value = "limit") int limit);
+	
 	
 	/**
 	 * 查询所有成功借出明细条数
 	 * @return
 	 */
-	public int countSuccessLended();
+	public int countSuccessLendedList();
 	
 	/**
-	 * 根据偏移量来查询成功借出明细列表
-	 * @param offset
-	 * @param limit
+	 * 查询所有的成功借出书籍明细表，然后按页返回
+	 * @param offset 从哪开始取
+	 * @param limit 取多少条
 	 * @return
 	 */
-	public List<SuccessLended> querySuccessLendedList(@Param(value = "offset") int offset, @Param(value = "limit") int limit);
+	public List<SuccessLended> querySuccessLendedListByPage(
+			@Param(value = "offset") int offset,
+			@Param(value = "limit") int limit);
 }

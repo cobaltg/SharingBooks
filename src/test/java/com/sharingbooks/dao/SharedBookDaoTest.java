@@ -94,6 +94,24 @@ public class SharedBookDaoTest {
 //	SharedBook [bookId=10, bookName=《Java核心技术卷一》, bookDescription=Horstmann，机械工业出版社, masterPhone=13748475867, releaseTime=Tue May 23 00:00:00 CST 2017]
 	
 	@Test
+	public void testQuerySharedBookListOfUserByPage(){
+		List<SharedBook> list=sharedBookDao.querySharedBookListOfUserByPage("18716039352", 0, 2);
+		List<SharedBook> list1=sharedBookDao.querySharedBookListOfUserByPage("18716039352", 2, 2);
+		for(SharedBook sharedBook: list){
+			System.out.println(sharedBook);
+		}
+		System.out.println("-----------------------------------------");
+		for(SharedBook sharedBook: list1){
+			System.out.println(sharedBook);
+		}
+	}
+//測試結果
+//	SharedBook [bookId=27, bookName=《算法导论》, bookDescription=Stein，机械工业出版社, masterPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	SharedBook [bookId=28, bookName=《Think in Java》, bookDescription=Eckel，机械工业出版社, masterPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+//	-----------------------------------------
+//	SharedBook [bookId=29, bookName=《深入理解Java Web技术内幕》, bookDescription=许令波，电子工业出版社, masterPhone=18716039352, releaseTime=Tue May 23 00:00:00 CST 2017]
+			
+	@Test
 	public void testQuerySharedBookListByPage(){
 		List<SharedBook> list=sharedBookDao.querySharedBookListByPage("算","",0, 5);
 		List<SharedBook> list1=sharedBookDao.querySharedBookListByPage("","",5, 5);
@@ -140,7 +158,7 @@ public class SharedBookDaoTest {
 	
 	@Test
 	public void testReduceSharedBookByShared() {
-		System.out.println(sharedBookDao.reduceSharedBookByShared("《编译原理》", "13878759898"));
+		System.out.println(sharedBookDao.reduceSharedBookByShared("《编译原理》","", "13878759898"));
 	}
 //测试结果：
 //	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@287f94b1]

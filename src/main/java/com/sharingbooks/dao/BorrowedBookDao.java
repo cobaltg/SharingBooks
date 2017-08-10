@@ -1,6 +1,7 @@
 package com.sharingbooks.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sharingbooks.entity.BorrowedBook;
@@ -31,6 +32,30 @@ public interface BorrowedBookDao {
 		public int countBorrowedBook(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription);
 		
 		/**
+		 * 根据分页查询符合条件的书籍信息
+		 * @param bookName
+		 * @param bookDescription
+		 * @param offset
+		 * @param limit
+		 * @return
+		 */
+		public List<BorrowedBook> queryBorrowedBookListByPage(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription,@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
+		
+		/**
+		 * 查詢用戶自己的需借書籍的信息的條數
+		 */
+		public int countqueryBorrowedBookListOfUser(@Param(value = "userPhone") String userPhone);
+		
+		/**
+		 * 根据查询条件来查询用户的自己的需借书籍记录，按分页返回
+		 * @param userName
+		 * @param offset
+		 * @param limit
+		 * @return
+		 */
+		public List<BorrowedBook> queryBorrowedBookListOfUserByPage(@Param(value = "userPhone") String userPhone,@Param(value = "offset") int offset, @Param(value = "limit")  int limit);
+		
+		/**
 		 * 根据偏移量查询借书籍信息列表
 		 * @param offset
 		 * @param limit
@@ -58,7 +83,7 @@ public interface BorrowedBookDao {
 		 * @param bookName 书籍名字
 		 * @param userPhone 借书用户的联系方式
 		 */
-		public  int reduceBorrowedBookByBorrowed(@Param(value = "bookName") String bookName, @Param(value = "userPhone") String userPhone);
+		public  int reduceBorrowedBookByBorrowed(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription, @Param(value = "userPhone") String userPhone);
 	
 		/**
 		 * 更改借书信息

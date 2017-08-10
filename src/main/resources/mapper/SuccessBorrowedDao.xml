@@ -7,85 +7,43 @@
 
 	<insert id="insertSuccessBorrowed">
 	  insert ignore into success_borrowed
-	    (book_id,borrower_phone)
+	    (book_id,book_name,book_description,book_master,borrower_name,create_time)
 	  values
-	    (#{bookId},#{borrowerPhone})
+	    (#{bookId},#{bookName},#{bookDescription},#{bookMaster},#{borrowerName},#{createTime})
 	</insert>
-	
-	<select id="queryByIdWithSharedBook" resultType="SuccessBorrowed">
-	<!-- 根据id查询SuccessBorrowed并携带SharedBook实体 -->
-	<!-- 通过别名告诉mybatis把结果映射到SuccessBorrowed同时映射到sharedBook属性 -->
-	  select
-	    sb.book_id,
-	    sb.borrower_phone,
-	    sb.create_time,
-	    s.book_id "sharedBook.book_id",
-	    s.book_name "sharedBook.book_name",
-	    s.book_description "sharedBook.book_description",
-	    s.master_phone "sharedBook.master_phone",
-	    s.release_time "sharedBook.release_time"
-	  from success_borrowed sb
-	  inner join sharedbook s on sb.book_id = s.book_id
-	  where sb.book_id = #{bookId}
-	</select>
-	
-	<select id="querySuccessBorrowedListByBorrowerPhone" parameterType="String" resultType="SuccessBorrowed">
-	  select
-	    sb.book_id,
-	    sb.borrower_phone,
-	    sb.create_time,
-	    s.book_id "sharedBook.book_id",
-	    s.book_name "sharedBook.book_name",
-	    s.book_description "sharedBook.book_description",
-	    s.master_phone "sharedBook.master_phone",
-	    s.release_time "sharedBook.release_time"
-	  from success_borrowed sb
-	  inner join sharedbook s on sb.book_id = s.book_id
-	  where sb.borrower_phone = #{borrowerPhone}
-	</select>
-	
-	<select id="countSuccessBorrowedByBorrowerPhone" parameterType="String" resultType="int">
+		
+	<select id="countSuccessBorrowedOfUser" parameterType="String" resultType="int">
 	  select
 	    count(*)
 	  from
 	    success_borrowed
 	  where
-	    borrower_phone=#{borrowerPhone}
+	    borrower_name=#{userName}
 	</select>
 	
-	<select id="querySuccessBorrowed" resultType="SuccessBorrowed">
-	  select
-	    sb.book_id,
-	    sb.borrower_phone,
-	    sb.create_time,
-	    s.book_id "sharedBook.book_id",
-	    s.book_name "sharedBook.book_name",
-	    s.book_description "sharedBook.book_description",
-	    s.master_phone "sharedBook.master_phone",
-	    s.release_time "sharedBook.release_time"
-	  from success_borrowed sb
-	  inner join sharedbook s on sb.book_id = s.book_id
+	<select id="querySuccessBorrowedListOfUserByPage" resultType="SuccessBorrowed">
+	  select 
+	    book_id,book_name,book_description,book_master,borrower_name,create_time
+	  from 
+	    success_borrowed
+	  where 
+	    borrower_name = #{userName}
+	  order by create_time desc limit #{offset},#{limit}
 	</select>
-	
-	<select id="countSuccessBorrowed" resultType="int">
+		
+	<select id="countSuccessBorrowedList" resultType="int">
 	  select
 	    count(*)
 	  from
 	    success_borrowed
 	</select>
 	
-	<select id="querySuccessBorrowedList" resultType="SuccessBorrowed">
-	  select
-	    sb.book_id,
-	    sb.borrower_phone,
-	    sb.create_time,
-	    s.book_id "sharedBook.book_id",
-	    s.book_name "sharedBook.book_name",
-	    s.book_description "sharedBook.book_description",
-	    s.master_phone "sharedBook.master_phone",
-	    s.release_time "sharedBook.release_time"
-	  from success_borrowed sb
-	  inner join sharedbook s on sb.book_id = s.book_id
-	  order by sb.create_time desc limit #{offset},#{limit}
+	<select id="querySuccessBorrowedListByPage" resultType="SuccessBorrowed">
+	  select 
+	    book_id,book_name,book_description,book_master,borrower_name,create_time
+	  from 
+	    success_borrowed
+	  order by create_time desc limit #{offset},#{limit}
 	</select>
+	
 </mapper>

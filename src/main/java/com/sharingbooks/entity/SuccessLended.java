@@ -10,12 +10,16 @@ import java.util.Date;
 public class SuccessLended {
 	
 	private long bookId;
-		
-	private String masterPhone;
 	
-	private Date createTime=new Date();
-
-	private BorrowedBook borrowedBook;
+	private String bookName;
+	
+	private String bookDescription;
+	
+	private String bookMaster;
+	
+	private String ReceiverName;
+	
+	private Date createTime;
 
 	public long getBookId() {
 		return bookId;
@@ -25,12 +29,36 @@ public class SuccessLended {
 		this.bookId = bookId;
 	}
 
-	public String getMasterPhone() {
-		return masterPhone;
+	public String getBookName() {
+		return bookName;
 	}
 
-	public void setMasterPhone(String masterPhone) {
-		this.masterPhone = masterPhone;
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+	public String getBookDescription() {
+		return bookDescription;
+	}
+
+	public void setBookDescription(String bookDescription) {
+		this.bookDescription = bookDescription;
+	}
+
+	public String getBookMaster() {
+		return bookMaster;
+	}
+
+	public void setBookMaster(String bookMaster) {
+		this.bookMaster = bookMaster;
+	}
+
+	public String getReceiverName() {
+		return ReceiverName;
+	}
+
+	public void setReceiverName(String receiverName) {
+		ReceiverName = receiverName;
 	}
 
 	public Date getCreateTime() {
@@ -41,18 +69,11 @@ public class SuccessLended {
 		this.createTime = createTime;
 	}
 
-	public BorrowedBook getBorrowedBook() {
-		return borrowedBook;
-	}
-
-	public void setBorrowedBook(BorrowedBook borrowedBook) {
-		this.borrowedBook = borrowedBook;
-	}
-
 	@Override
 	public String toString() {
-		return "SuccessLended [bookId=" + bookId + ", masterPhone="
-				+ masterPhone + ", createTime=" + createTime
-				+ ", borrowedBook=" + borrowedBook + "]";
-	}
+		return "SuccessLended [bookId=" + bookId + ", bookName=" + bookName
+				+ ", bookDescription=" + bookDescription + ", bookMaster="
+				+ bookMaster + ", ReceiverName=" + ReceiverName
+				+ ", createTime=" + createTime + "]";
+	}	
 }

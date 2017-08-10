@@ -45,6 +45,25 @@
 	  order by book_id limit #{offset},#{limit}
 	</select>
 	
+	<select id="countquerySharedBookListOfUser" resultType="int">
+	  select
+	    count(*)
+	  from
+	    sharedbook
+	  where 
+	    master_phone = #{userPhone}
+	</select>
+	
+	<select id="querySharedBookListOfUserByPage" resultType="SharedBook">
+	  select
+	    book_id,book_name,book_description,master_phone,release_time
+	  from
+	    sharedbook
+	  where
+		 master_phone = #{userPhone}
+	  order by book_id limit #{offset},#{limit}
+	</select>
+	
 	<select id="querySharedBookListByPage" resultType="SharedBook">
 	  select
 	    book_id,book_name,book_description,master_phone,release_time
@@ -72,7 +91,7 @@
 	  delete 
 	    from sharedbook
 	  where
-	    book_name = #{bookName} and master_phone = #{userPhone}
+	    book_name = #{bookName} and book_description = #{bookDescription} and master_phone = #{userPhone}
 	</delete>
 	
 	<update id="updateSharedBook">

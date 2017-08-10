@@ -1,5 +1,6 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -8,53 +9,61 @@ import com.sharingbooks.entity.SuccessBorrowed;
 
 /**
  * 成功借阅书籍明细表的接口
+ * 
  * @author think
  */
 public interface SuccessBorrowedDao {
 	
 	/**
-	 * 插入借阅成功明细
-	 * @param bookId 书籍id
-	 * @param borrowerPhone 借书人电话号码
-	 * @return
-	 */
-	public int insertSuccessBorrowed(@Param(value = "bookId") long bookId, @Param(value = "borrowerPhone") String borrowerPhone);	
-	
-	/**
-	 * 根据id查询SuccessBorrowed并携带借阅书籍对象实体
+	 * 插入成功借阅明细
 	 * @param bookId
-	 * @return
+	 * @param bookName
+	 * @param bookDescription
+	 * @param bookMaster
+	 * @param borrowerName
+	 * @param createTime
+	 * @return 
 	 */
-	public SuccessBorrowed queryByIdWithSharedBook(long bookId);
-	
-	/**
-	 * 用户查询自己的借阅成功明细表
-	 * @param borrowerPhone 用户自己的电话号码
-	 * @return 明细信息列表
-	 */
-	public List<SuccessBorrowed> querySuccessBorrowedListByBorrowerPhone(String borrowerPhone);
-	
+	public int insertSuccessBorrowed(@Param(value = "bookId") long bookId,
+			@Param(value = "bookName") String bookName,
+			@Param(value = "bookDescription") String bookDescription,
+			@Param(value = "bookMaster") String bookMaster,
+			@Param(value = "borrowerName") String borrowerName,
+			@Param(value = "createTime") Date createTime);
+
 	/**
 	 * 根据查询条件查询用户的借阅明细表的条数
-	 */
-	public int countSuccessBorrowedByBorrowerPhone(String borrowerPhone);
-	
-	/**
-	 * 查询所有成功借阅明细信息
+	 * @param userName
 	 * @return
 	 */
-	public List<SuccessBorrowed> querySuccessBorrowed();
+	public int countSuccessBorrowedOfUser(String userName);
+
+	/**
+	 * 用户查询自己的成功借阅明细，然后按页返回
+	 * @param userName
+	 * @param offset 从哪开始取
+	 * @param limit 取多少条
+	 * @return
+	 */
+	public List<SuccessBorrowed> querySuccessBorrowedListOfUserByPage(
+			@Param(value = "userName") String userName,
+			@Param(value = "offset") int offset,
+			@Param(value = "limit") int limit);
+	
+
 	/**
 	 * 查询所有成功借阅明细条数
 	 * @return
 	 */
-	public int countSuccessBorrowed();
-	
+	public int countSuccessBorrowedList();
+
 	/**
-	 * 根据偏移量来查询成功借阅明细列表
-	 * @param offset
-	 * @param limit
+	 * 查询所有的成功借阅书籍明细表，然后按页返回
+	 * @param offset 从哪开始取
+	 * @param limit 取多少条
 	 * @return
 	 */
-	public List<SuccessBorrowed> querySuccessBorrowedList(@Param(value = "offset") int offset, @Param(value = "limit") int limit);
+	public List<SuccessBorrowed> querySuccessBorrowedListByPage(
+			@Param(value = "offset") int offset,
+			@Param(value = "limit") int limit);
 }

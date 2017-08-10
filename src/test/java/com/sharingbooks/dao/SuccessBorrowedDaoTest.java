@@ -1,5 +1,6 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.Test;
@@ -8,9 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.sharingbooks.entity.SharedBook;
 import com.sharingbooks.entity.SuccessBorrowed;
-
 
 /**
  * 配置spring和Junit整合，Junit启动时加载springIOC容器
@@ -21,93 +20,81 @@ import com.sharingbooks.entity.SuccessBorrowed;
 @ContextConfiguration({"classpath:spring/spring-dao.xml"})
 public class SuccessBorrowedDaoTest {
 	
-	@Autowired
+	@Autowired 
 	private SuccessBorrowedDao successBorrowedDao;
-		
+	
 	@Test
 	public void testInsertSuccessBorrowed() {
-		System.out.println(successBorrowedDao.insertSuccessBorrowed(19, "18716039352"));
-		//System.out.println(successBorrowedDao.insertSuccessBorrowed(20, "18716039352"));
-		//System.out.println(successBorrowedDao.insertSuccessBorrowed(25, "18176048764"));
+		int count=successBorrowedDao.insertSuccessBorrowed(28, "书籍28", "书籍描述28", "书籍主人28", "借书人28", new Date());
+		System.out.println(count);
 	}
-//测试结果：
-//	[main] DEBUG c.s.d.S.insertSuccessBorrowed - ==>  Preparing: insert into success_borrowed (book_id,borrower_phone) values (?,?) 
-//	[main] DEBUG c.s.d.S.insertSuccessBorrowed - ==> Parameters: 19(Long), 18716039352(String)
+//测试结果
 //	[main] DEBUG c.s.d.S.insertSuccessBorrowed - <==    Updates: 1
+//	[main] DEBUG org.mybatis.spring.SqlSessionUtils - Closing non transactional SqlSession [org.apache.ibatis.session.defaults.DefaultSqlSession@6548bb7d]
+//	1
+
 	
 	@Test
-	public void testQueryByIdWithSharedBook() {
-		SuccessBorrowed successBorrowed=successBorrowedDao.queryByIdWithSharedBook(19);
-		System.out.println(successBorrowed);
-		SharedBook sbook=successBorrowed.getSharedBook();
-		System.out.println("-----------------------------------------");
-		System.out.println(sbook);
-	}
-//测试结果：
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=《汇编语言》, bookDescription=王爽，清华大学出版社, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	-----------------------------------------
-//	SharedBook [bookId=19, bookName=《汇编语言》, bookDescription=王爽，清华大学出版社, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]
-	
-	@Test
-	public void testQuerySuccessBorrowedListByBorrowerPhone() {
-		List<SuccessBorrowed> list=successBorrowedDao.querySuccessBorrowedListByBorrowerPhone("18716039352");
-		List<SuccessBorrowed> list1=successBorrowedDao.querySuccessBorrowedListByBorrowerPhone("18716039353");
-		for(SuccessBorrowed sb: list){
-			System.out.println(sb);
-		}
-		System.out.println("-----------------------------------------");
-		for(SuccessBorrowed sb: list1){
-			System.out.println(sb);
-		}
+	public void testCountSuccessBorrowedOfUser() {
+		System.out.println(successBorrowedDao.countSuccessBorrowedOfUser("借书人15"));
 	}
 //测试结果
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=《汇编语言》, bookDescription=王爽，清华大学出版社, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=《数值分析》, bookDescription=李庆杨，清华大学出版社, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	-----------------------------------------
-	
-	@Test
-	public void testCountSuccessBorrowedByBorrowerPhone() {
-		System.out.println(successBorrowedDao.countSuccessBorrowedByBorrowerPhone("18716039352"));
-	}
-//测试结果
-//	[main] DEBUG c.s.d.S.countSuccessBorrowedByBorrowerPhone - ==>  Preparing: select count(*) from success_borrowed where borrower_phone=? 
-//	[main] DEBUG c.s.d.S.countSuccessBorrowedByBorrowerPhone - ==> Parameters: 18716039352(String)
 //	2
 	
 	@Test
-	public void testQuerySuccessBorrowed() {
-		List<SuccessBorrowed> list=successBorrowedDao.querySuccessBorrowed();
+	public void testQuerySuccessBorrowedListOfUserByPage() {
+		List<SuccessBorrowed> list=successBorrowedDao.querySuccessBorrowedListOfUserByPage("借书人13", 0, 3);
+		List<SuccessBorrowed> list2=successBorrowedDao.querySuccessBorrowedListOfUserByPage("借书人13", 3, 3);
+		List<SuccessBorrowed> list3=successBorrowedDao.querySuccessBorrowedListOfUserByPage("借书人13", 6, 3);
 		for(SuccessBorrowed s: list){
+			System.out.println(s);
+		}
+		System.out.println("++++++++++++++++++++++++++++");
+		for(SuccessBorrowed s: list2){
+			System.out.println(s);
+		}
+		System.out.println("++++++++++++++++++++++++++++");
+		for(SuccessBorrowed s: list3){
 			System.out.println(s);
 		}
 	}
 //测试结果
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=《汇编语言》, bookDescription=王爽，清华大学出版社, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=《数值分析》, bookDescription=李庆杨，清华大学出版社, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=《追风筝的人》, bookDescription=朗赛尼，世界出版集团, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
-	
+//	SuccessBorrowed [bookId=13, bookName=书名13, bookDescription=书籍描述13, bookMaster=书籍主人13, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=18, bookName=书名18, bookDescription=书籍描述18, bookMaster=书籍主人13, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=23, bookName=书名23, bookDescription=书籍描述23, bookMaster=书籍主人23, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++
+//	SuccessBorrowed [bookId=24, bookName=书名24, bookDescription=书籍描述24, bookMaster=书籍主人24, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=25, bookName=书名25, bookDescription=书籍描述25, bookMaster=书籍主人25, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=26, bookName=书名26, bookDescription=书籍描述26, bookMaster=书籍主人26, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++
+//	SuccessBorrowed [bookId=27, bookName=书名27, bookDescription=书籍描述27, bookMaster=书籍主人27, borrowerName=借书人13, createTime=Tue May 23 00:00:00 CST 2017]
+
 	@Test
-	public void testCountSuccessBorrowed() {
-		System.out.println(successBorrowedDao.countSuccessBorrowed());
+	public void testCountSuccessBorrowedList() {
+		System.out.println(successBorrowedDao.countSuccessBorrowedList());
 	}
 //测试结果
-//	3
+//	22
 	
 	@Test
-	public void testQuerySuccessBorrowedList() {
-		List<SuccessBorrowed> list=successBorrowedDao.querySuccessBorrowedList(0, 2);
-		List<SuccessBorrowed> list1=successBorrowedDao.querySuccessBorrowedList(2, 2);
-		for(SuccessBorrowed sb: list){
-			System.out.println(sb);
+	public void testQuerySuccessBorrowedListByPage() {
+		List<SuccessBorrowed> list=successBorrowedDao.querySuccessBorrowedListByPage(0,3);
+		List<SuccessBorrowed> list2=successBorrowedDao.querySuccessBorrowedListByPage(3,3);
+		for(SuccessBorrowed s: list){
+			System.out.println(s);
 		}
-		System.out.println("-----------------------------------------");
-		for(SuccessBorrowed sb: list1){
-			System.out.println(sb);
+		System.out.println("++++++++++++++++++++++++++++");
+		for(SuccessBorrowed s: list2){
+			System.out.println(s);
 		}
+		System.out.println("++++++++++++++++++++++++++++");
 	}
 //测试结果
-//	SuccessBorrowed [listId=25, borrowerPhone=18176048764, createTime=Tue Aug 08 09:32:45 CST 2017, sharedBook=SharedBook [bookId=25, bookName=《追风筝的人》, bookDescription=朗赛尼，世界出版集团, masterPhone=13487698574, releaseTime=Mon Aug 07 17:14:54 CST 2017]]
-//	SuccessBorrowed [listId=20, borrowerPhone=18716039352, createTime=Tue Aug 08 09:31:28 CST 2017, sharedBook=SharedBook [bookId=20, bookName=《数值分析》, bookDescription=李庆杨，清华大学出版社, masterPhone=18777837887, releaseTime=Tue May 23 00:00:00 CST 2017]]
-//	-----------------------------------------
-//	SuccessBorrowed [listId=19, borrowerPhone=18716039352, createTime=Tue Aug 08 09:22:03 CST 2017, sharedBook=SharedBook [bookId=19, bookName=《汇编语言》, bookDescription=王爽，清华大学出版社, masterPhone=18777837876, releaseTime=Tue May 23 00:00:00 CST 2017]]
+//	SuccessBorrowed [bookId=1, bookName=书名1, bookDescription=书籍描述1, bookMaster=书籍主人1, borrowerName=借书人1, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=2, bookName=书名2, bookDescription=书籍描述2, bookMaster=书籍主人2, borrowerName=借书人2, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=3, bookName=书名3, bookDescription=书籍描述3, bookMaster=书籍主人3, borrowerName=借书人3, createTime=Tue May 23 00:00:00 CST 2017]
+//	++++++++++++++++++++++++++++
+//	SuccessBorrowed [bookId=4, bookName=书名4, bookDescription=书籍描述4, bookMaster=书籍主人4, borrowerName=借书人4, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=5, bookName=书名5, bookDescription=书籍描述5, bookMaster=书籍主人5, borrowerName=借书人5, createTime=Tue May 23 00:00:00 CST 2017]
+//	SuccessBorrowed [bookId=6, bookName=书名6, bookDescription=书籍描述6, bookMaster=书籍主人6, borrowerName=借书人6, createTime=Tue May 23 00:00:00 CST 2017]
 }
