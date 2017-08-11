@@ -114,15 +114,10 @@ public class BorrowedBookDaoTest {
 
 	@Test
 	public void testAddBorrowedBook() {
-		BorrowedBook borrowedBook=new BorrowedBook();
-		borrowedBook.setBookName("《追风筝的人》");
-		borrowedBook.setBookDescription("朗赛尼，世界出版集团");
-		borrowedBook.setBorrowerPhone("13487698574");
-		borrowedBook.setReleaseTime(new Date());
-		borrowedBookDao.addBorrowedBook(borrowedBook);
+		borrowedBookDao.addBorrowedBook("《追风筝的人》","朗赛尼，世界出版集团","13487698574",new Date());
 	}
 //测试结果
-//	17:18:47.307 [main] DEBUG c.s.d.B.addBorrowedBook - <==    Updates: 1
+//	[main] DEBUG c.s.d.B.addBorrowedBook - <==    Updates: 1
 	
 	@Test
 	public void testReduceBorrowedBook() {

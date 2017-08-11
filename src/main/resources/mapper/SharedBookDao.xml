@@ -76,7 +76,7 @@
 	  order by book_id limit #{offset},#{limit}
 	</select>
 	
-	<insert id="addSharedBook" parameterType="SharedBook">
+	<insert id="addSharedBook">
 	  insert into sharedbook
 	    (book_name,book_description,master_phone,release_time)
 	  values

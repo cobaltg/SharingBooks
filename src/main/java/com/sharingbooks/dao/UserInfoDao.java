@@ -35,7 +35,7 @@ public interface UserInfoDao {
 	 * @param 
 	 * @return 更改行数
 	 */
-	public int updateUser(@Param(value = "userName") String userName,@Param(value = "userPwd") String userPwd,@Param(value = "userPhone")String userPhone,@Param(value = "userId")long userId);
+	public int updateUser(@Param(value = "userName") String userName,@Param(value = "userPwd") String userPwd,@Param(value = "userPhone")String userPhone,@Param(value = "userId") long userId);
 	
 	/**
 	 * 根据用户名/电话号码、密码查询用户，用于登录
@@ -67,18 +67,20 @@ public interface UserInfoDao {
 	public UserInfo getUserByPhone(String userPhone);
 	
 	/**
-	 * 查询用户的数量
-	 * @param userName 用户名
-	 * @param userPhone 用户联系方式
+	 * 根据查询条件查询符合的用户信息的条数
+	 * @param userName
+	 * @param userPhone
 	 * @return
 	 */
-	public int countUserInfo();
+	public int countqueryUserInfoList(@Param(value = "userName") String userName, @Param(value = "userPhone") String userPhone);
 	
 	/**
 	 * 根据偏移量查询条件查询用户信息列表
-	 * @param offset 
+	 * @param userName
+	 * @param userPhone
+	 * @param offset
 	 * @param limit
 	 * @return
 	 */
-	public List<UserInfo> queryUserInfoList(@Param(value = "offset") int offset, @Param(value = "limit") int limit);
+	public List<UserInfo> queryUserInfoListByPage(@Param(value = "userName") String userName, @Param(value = "userPhone") String userPhone, @Param(value = "offset") int offset, @Param(value = "limit") int limit);
 }

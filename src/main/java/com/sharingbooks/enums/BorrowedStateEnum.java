@@ -6,14 +6,14 @@ package com.sharingbooks.enums;
  * @author think
  * 
  */
-public enum BorrowedBookStateEnum {
-	SUCCESS(1, "节约成功"), DEFEAT(0, "系统异常"), DATA_REWRITE(-1, "数据重写");
+public enum BorrowedStateEnum {
+	SUCCESS(1, "借阅成功"), DEFEAT(0, "系统异常，借阅失败！"), DATA_REWRITE(-1, "数据重写");
 
 	private int state;
 
 	private String stateInfo;
 
-	BorrowedBookStateEnum(int state, String stateInfo) {
+	BorrowedStateEnum(int state, String stateInfo) {
 		this.state = state;
 		this.stateInfo = stateInfo;
 	}
@@ -26,8 +26,8 @@ public enum BorrowedBookStateEnum {
 		return stateInfo;
 	}
 
-	public static BorrowedBookStateEnum stateOf(int index) {
-		for (BorrowedBookStateEnum state : values()) {
+	public static BorrowedStateEnum stateOf(int index) {
+		for (BorrowedStateEnum state : values()) {
 			if (state.getState() == index) {
 				return state;
 			}

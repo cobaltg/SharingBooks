@@ -138,12 +138,7 @@ public class SharedBookDaoTest {
 	
 	@Test
 	public void testAddSharedBook() {
-		SharedBook sharedBook=new SharedBook();
-		sharedBook.setBookName("《追风筝的人》");
-		sharedBook.setBookDescription("朗赛尼，世界出版集团");
-		sharedBook.setMasterPhone("13487698574");
-		sharedBook.setReleaseTime(new Date());
-		sharedBookDao.addSharedBook(sharedBook);
+		sharedBookDao.addSharedBook("《追风筝的人》","朗赛尼，世界出版集团","13487698574",new Date());
 	}
 //测试结果
 //	[main] DEBUG c.s.dao.SharedBookDao.addSharedBook - <==    Updates: 1

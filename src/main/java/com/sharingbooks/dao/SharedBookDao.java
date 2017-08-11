@@ -1,6 +1,8 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.sharingbooks.entity.SharedBook;
@@ -66,7 +68,7 @@ public interface SharedBookDao {
 	 * @param sharedbook 书籍的所有信息
 	 * return 添加的行数
 	 */
-	public int addSharedBook(SharedBook sharedBook);
+	public int addSharedBook(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription, @Param(value = "masterPhone") String masterPhone, @Param(value = "releaseTime") Date releaseTime);
 	
 	/**
 	 * 减书单上的记录

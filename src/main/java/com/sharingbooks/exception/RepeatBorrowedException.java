@@ -1,6 +1,6 @@
 package com.sharingbooks.exception;
 
-public class RepeatBorrowedException extends BorrowedBookException {
+public class RepeatBorrowedException extends BorrowedException {
 
 	public RepeatBorrowedException(String message, Throwable cause) {
 		super(message, cause);

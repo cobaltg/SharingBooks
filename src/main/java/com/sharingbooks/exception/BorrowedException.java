@@ -5,19 +5,19 @@ package com.sharingbooks.exception;
  * @author think
  *
  */
-public class BorrowedBookException extends RuntimeException {
+public class BorrowedException extends RuntimeException {
 
-	public BorrowedBookException(String message, Throwable cause) {
+	public BorrowedException(String message, Throwable cause) {
 		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BorrowedBookException(String message) {
+	public BorrowedException(String message) {
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
 
-	public BorrowedBookException(String message, String message2) {
+	public BorrowedException(String message, String message2) {
 		// TODO Auto-generated constructor stub
 	}
 	

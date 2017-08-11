@@ -76,7 +76,7 @@
 	  order by book_id limit #{offset},#{limit}
 	</select>
 	
-	<insert id="addBorrowedBook" parameterType="BorrowedBook">
+	<insert id="addBorrowedBook">
 	  insert into borrowedbook
 	    (book_name,book_description,borrower_phone,release_time)
 	  values

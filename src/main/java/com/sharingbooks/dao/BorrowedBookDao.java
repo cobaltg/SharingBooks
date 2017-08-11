@@ -1,5 +1,6 @@
 package com.sharingbooks.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -68,7 +69,7 @@ public interface BorrowedBookDao {
 		 * @param borrowedbook 书籍的所有信息
 		 * return 插入的行数
 		 */
-		public int addBorrowedBook(BorrowedBook borrowedBook);
+		public int addBorrowedBook(@Param(value = "bookName") String bookName, @Param(value = "bookDescription") String bookDescription, @Param(value = "borrowerPhone") String borrowerPhone, @Param(value = "releaseTime") Date releaseTime);
 	
 		/**
 		 * 减借书登记表中的一条记录

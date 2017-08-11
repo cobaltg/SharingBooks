@@ -106,14 +106,30 @@ public class UserInfoDaoTest {
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]		
 	
 	@Test
+	public void testCountqueryUserInfoList(){
+		System.out.println(userInfoDao.countqueryUserInfoList("", ""));
+	}
+//测试结果
+//	18
+	
+	@Test
 	public void testQueryUserInfoList() {
-		List<UserInfo> list=userInfoDao.queryUserInfoList(0, 100);
+		List<UserInfo> list=userInfoDao.queryUserInfoListByPage("", "", 0, 3);
+		List<UserInfo> list1=userInfoDao.queryUserInfoListByPage("", "", 3, 3);
 		for(UserInfo userinfo:list){
+			System.out.println(userinfo);
+		}
+		System.out.println("++++++++++++++++++++++++");
+		for(UserInfo userinfo:list1){
 			System.out.println(userinfo);
 		}
 	}
 //测试结果
 //	UserInfo [userId=5, userName=Joey, userPwd=joey, userPhone=18176048764]
 //	UserInfo [userId=6, userName=Vivian, userPwd=vivian, userPhone=18179868764]
-//	UserInfo [userId=8, userName=Monical, userPwd=Monical, userPhone=18715647645]
+//	UserInfo [userId=8, userName=Monical, userPwd=monical, userPhone=18715647645]
+//	++++++++++++++++++++++++
+//	UserInfo [userId=9, userName=cobaltg, userPwd=714342, userPhone=18716039352]
+//	UserInfo [userId=10, userName=用户1, userPwd=用户密码1, userPhone=用户电话1]
+//	UserInfo [userId=11, userName=用户2, userPwd=用户密码2, userPhone=用户电话2]
 }

@@ -21,14 +21,18 @@
 	  where
 	    user_id = #{userId}
 	</select>
-	
+ 	
 	<insert id="addUser">
 	  insert into userinfo
 	    (user_name,user_pwd,user_phone)
 	  values
 	    (#{userName},#{userPwd},#{userPhone})
 	</insert>
-	 
+ 
+ 	<delete id="reduceUser">
+	  delete from userinfo where user_id=#{userId}
+	</delete>
+	
 	<update id="updateUser">
 	  update
 	    userinfo 
@@ -40,10 +44,6 @@
 	  where user_id=#{userId}
 	</update>
 
-	<delete id="reduceUser">
-	  delete from userinfo where user_id=#{userId}
-	</delete>
-	
 	<select id="getUser" resultType="int">
 	  select
 	    count(*)
@@ -80,18 +80,26 @@
 		  user_phone=#{userPhone}
 	</select>
 	
-	<select id="countUserInfo"  resultType="int">
+	<select id="countqueryUserInfoList"  resultType="int">
 	  select
 	    count(*)
 	  from 
 	    userinfo;
+	  <where>
+	    <if test="userName!=null and !&quot;&quot;.equals(userName.trim())">and user_name = #{userName} </if>
+	    <if test="userPhone!=null and !&quot;&quot;.equals(userPhone.trim())">and user_phone = #{userPhone} </if>
+	  </where>
 	</select>
 	
-	<select id="queryUserInfoList" resultType="UserInfo">
+	<select id="queryUserInfoListByPage" resultType="UserInfo">
 	  select
 	    user_id,user_name,user_pwd,user_phone
 	  from
 	    userinfo
+	  <where>
+	    <if test="userName!=null and !&quot;&quot;.equals(userName.trim())">and user_name = #{userName} </if>
+	    <if test="userPhone!=null and !&quot;&quot;.equals(userPhone.trim())">and user_phone = #{userPhone} </if>
+	  </where>
 	  order by user_id limit #{offset},#{limit}
 	</select>
 
