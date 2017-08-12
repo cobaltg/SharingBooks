@@ -7,7 +7,7 @@ package com.sharingbooks.enums;
  * 
  */
 public enum BorrowedStateEnum {
-	SUCCESS(1, "借阅成功"), DEFEAT(0, "系统异常，借阅失败！"), DATA_REWRITE(-1, "数据重写");
+	SUCCESS(1, "借阅成功"), INNER_ERROR(0, "系统异常，借阅失败！"), REPEAT_BORROWED(-1, "重复借书！"),BOOK_IS_NOT_EXIST(-2,"");
 
 	private int state;
 
